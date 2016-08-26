@@ -1,0 +1,28 @@
+// Drew Nelson
+// Aug 12 2016
+// Sitewide LESS Mixins
+
+.transition {
+    transition: border-color ease-in-out .15s, 
+                color ease-in-out .15s, 
+                background-color ease-in-out .15s, 
+                box-shadow ease-in-out .15s,
+                text-decoration ease-in-out .15s;
+}
+
+.spanHeaders {
+    span {
+        font-weight: bold;
+        &.green { 
+            color: @green; 
+        }
+
+        &.light-green { 
+            color: @light-green; 
+        }
+
+        &.challonge-orange {
+            color: @challonge-orange;
+        }
+    }
+}

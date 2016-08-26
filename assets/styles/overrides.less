@@ -1,0 +1,140 @@
+/*
+ * Drew Nelson
+ * Aug 17 2016
+ *
+ * Bootstrap overrides for SmashStats
+ */
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: @white;
+    background-color: @light-gray;
+    .transition;
+}
+
+.nav-pills > li > a:hover {
+    color: @challonge-orange;
+    .transition;
+}
+
+.navbar-default {
+    min-height: 70px;
+    border-color: @green;
+    background-color: rgba(0, 0, 0, 0.88);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+
+    .navbar-brand { 
+        color: @text-primary;
+        font-size: 24px;
+        .transition;
+    }
+
+    .navbar-brand:hover { color: @green; }
+
+    .navbar-nav { 
+
+        .open { }
+
+        li { 
+            a { 
+                color: @text-primary;
+                .transition;
+                &:hover { color: @green; }
+                &:focus { color: @text-primary; }
+            } 
+        }
+
+        .dropdown-menu {
+            background-color: @primary-black;
+            border: 1px solid @light-gray;
+
+            li { a:hover { color: @primary-black; } }
+        }
+
+    }
+
+}
+
+.well {
+    background-color: @black-quarter;
+    border: 1px solid @white;
+}
+
+.form-control {
+    background-color: @light-gray;
+    color: @text-primary;
+    &:focus { border-color: @green; }
+}
+
+.alert-player {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.table-striped > tbody > tr:nth-child(odd)> td, 
+.table-striped > tbody > tr:nth-child(odd)> th {
+   background-color: @light-gray;
+ }
+
+.modal-content {
+    background-color: @dark-gray;
+}
+
+.close {
+    color: @text-primary;
+    text-shadow: 0 1px 0 @light-gray;
+}
+
+/********************************/
+/*           BUTTONS            */
+/********************************/
+
+.btn.outline {
+    background: none;
+    padding: 12px 22px;
+    .transition;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn.full {
+    width: 100%;
+}
+
+.btn-primary.outline {
+    border: 2px solid @green;
+    color: @green;
+    .transition;
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: @light-green;
+    border-color: @light-green;
+    .transition;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: @light-green;
+    color: @light-green;
+    box-shadow: none;
+    .transition;
+}
+
+.btn-default.outline {
+    border: 2px solid @white;
+    color: @white;
+    .transition;
+}
+
+.btn-default.outline:hover, .btn-default.outline:focus, .open > .dropdown-toggle.btn-default {
+    color: @primary-black;
+    border-color: @white;
+    background-color: @white;
+    .transition;
+}
+.btn-default.outline:active, .btn-default.outline.active {
+    border-color: @light-gray;
+    color: @light-gray;
+    box-shadow: none;
+    .transition;
+}
