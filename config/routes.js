@@ -34,6 +34,18 @@ module.exports.routes = {
 
   '/': 'HomeController.index',
 
+  'get /login': {
+    view: 'auth/login'
+  },
+
+  'post /login': 'AuthController.login',
+
+  '/logout': 'AuthController.logout',
+
+  'get /register': {
+    view: 'auth/register'
+  },
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
