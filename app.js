@@ -53,7 +53,14 @@ process.chdir(__dirname);
     }
   }
 
-
+  // Attempt to set custom environment variables
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    console.error('It appears the dotenv npm module is not installed.');
+    console.error('Try running "npm install dotenv --save"');
+  }
+  
   // Start server
   sails.lift(rc('sails'));
 })();
