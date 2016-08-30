@@ -19,12 +19,18 @@ module.exports = {
         },
         username: {
             type: 'string',
-            required: false
+            required: true,
+            unique: true
         },
         password: {
             type: 'string',
             minLength: 6,
             required: true
+        },
+        communities: {
+            collection: 'community',
+            via: 'user',
+            through: 'communitymember'
         },
         toJSON: function() {
             var obj = this.toObject();
