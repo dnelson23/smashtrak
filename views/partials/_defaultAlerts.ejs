@@ -1,10 +1,30 @@
-<% if(res.messages) { %>
-  <% for(var key = 0; key < res.messages.length; key++) { %>
-    <div class="row">
-      <div class="col-xs-6 col-offset-3 alert alert-dismissible alert-<%= res.messages[key].type %>">
-      	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <%= res.messages[key].body %>
-      </div>
-    </div>
-  <% } %>
+<% if (messages && messages['error'].length > 0) { %>
+  <div class="alert alert-dismissible alert-danger">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <% messages['error'].forEach(function(message) { %>
+	    <%= message %>
+	    <br>
+	  <% }); %>
+  </div>
+  <br>
 <% } %>
+<% if (messages && messages['warning'].length > 0) { %>
+  <div class="alert alert-dismissible alert-warning">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <% messages['warning'].forEach(function(message) { %>
+	    <%= message %>
+	    <br>
+	  <% }); %>
+  </div>
+  <br>
+<% } %>
+<% if (messages && messages['success'].length > 0) { %>
+  <div class="alert alert-dismissible alert-success">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <% messages['success'].forEach(function(message) { %>
+	    <%= message %>
+	    <br>
+	  <% }); %>
+  </div>
+  <br>
+<% } %> 
