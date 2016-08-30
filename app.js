@@ -52,15 +52,17 @@ process.chdir(__dirname);
       rc = function () { return {}; };
     }
   }
-
-  // Attempt to set custom environment variables
-  try {
-    require('dotenv').config();
-  } catch (e) {
-    console.error('It appears the dotenv npm module is not installed.');
-    console.error('Try running "npm install dotenv --save"');
-  }
   
+  // Attempt to 
+  var dotenv;
+  try {
+    dotenv = require('dotenv');
+    dotenv.load();
+  } catch(e) {
+    console.log('The "dotenv" module does not seem to be laoded.');
+    return;
+  }
+
   // Start server
   sails.lift(rc('sails'));
 })();
