@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li role="presentation" class="active"><a href="#login-tab" aria-controls="login-tab" role="tab" data-toggle="tab">Login</a></li>
+          <li role="presentation"><a href="#register-tab" aria-controls="register-tab" role="tab" data-toggle="tab">Register</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="login-tab">
+            <form method="POST" action="/login">
+              <div class="field form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">@</div>
+                  <input type="email" name="email" class="form-control" placeholder="E-mail">
+                </div>
+              </div>
+              <div class="field form-group">
+                <div class="input-group">
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                  <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-lg btn-primary full outline">Login</button>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="register-tab">
+            <div class="row">
+              <div class="col-xs-12">
+                <form method="POST" action="/user">
+                  <div class="field form-group">
+                    <label for="email">E-mail:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">@</div>
+                      <input type="email" name="email" class="form-control" placeholder="mang0nation@gmail.com">
+                    </div>
+                  </div>
+                  <div class="field form-group">
+                    <label for="username">Username:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                      <input type="text" name="username" class="form-control" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="field form-group">
+                    <label for="password">Password:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                      <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="field form-group">
+                    <label for="reenter-pass">Re-Enter Password:</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                      <input id="confirm-pass" type="password" name="reenter-pass" class="form-control" placeholder="Re-Enter Password">
+                    </div>
+                  </div>
+                  <input type="submit" class="btn btn-primary btn-lg outline full">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

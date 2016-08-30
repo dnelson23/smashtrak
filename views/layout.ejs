@@ -15,10 +15,11 @@
   <body>
     <%- partial ('partials/_defaultNavBar.ejs') %>
     <div class="container">
+      <%- partial ('partials/_defaultAlerts.ejs') %>
       <div class="row">
         <div id="main-container" class="col-xs-12">
           <%- body %>
-          
+          <%- partial('partials/_loginModal.ejs') %>
           <!--SCRIPTS-->
           <script src="/js/dependencies/sails.io.js"></script>
           <script src="/js/dependencies/dist/jquery.js"></script>

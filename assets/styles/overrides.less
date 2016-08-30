@@ -16,6 +16,33 @@
     .transition;
 }
 
+.nav-tabs {
+    &.nav-justified {
+        font-size: 18px;
+
+        li {
+            &.active {
+                a  {
+                    color: @green;
+                    background-color: inherit;
+                    border: none;
+                }
+            }
+
+            a {
+                color: @light-gray;
+                border: none;
+            }
+        }
+
+        .active {
+            a:hover {
+                border: none;
+            }
+        }
+    }
+}
+
 .navbar-default {
     min-height: 70px;
     border-color: @green;
@@ -56,6 +83,12 @@
 
 }
 
+.tab-content {
+    .tab-pane {
+        padding-top: 15px;
+    }
+}
+
 .well {
     background-color: @black-quarter;
     border: 1px solid @white;
@@ -81,6 +114,10 @@
     background-color: @dark-gray;
 }
 
+.no-border {
+    border: none;
+}
+
 .close {
     color: @text-primary;
     text-shadow: 0 1px 0 @light-gray;
@@ -90,51 +127,87 @@
 /*           BUTTONS            */
 /********************************/
 
-.btn.outline {
-    background: none;
-    padding: 12px 22px;
-    .transition;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.btn {
+    &.outline {
+        background: none;
+        padding: 12px 22px;
+        .transition;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    &.full {
+        width: 100%;
+    }
 }
 
-.btn.full {
-    width: 100%;
-}
-
-.btn-primary.outline {
-    border: 2px solid @green;
-    color: @green;
-    .transition;
-}
-
-.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
-    color: @light-green;
-    border-color: @light-green;
-    .transition;
-}
-.btn-primary.outline:active, .btn-primary.outline.active {
-    border-color: @light-green;
-    color: @light-green;
-    box-shadow: none;
-    .transition;
-}
-
-.btn-default.outline {
-    border: 2px solid @white;
-    color: @white;
-    .transition;
-}
-
-.btn-default.outline:hover, .btn-default.outline:focus, .open > .dropdown-toggle.btn-default {
+.btn-primary {
+    background-color: @green;
+    border-color: @green;
     color: @primary-black;
-    border-color: @white;
-    background-color: @white;
-    .transition;
+
+    &:hover, &:focus, &:active, &.active {
+        background-color: @light-green;
+        border-color: @light-green;
+        color: @primary-black;
+        .transition;
+    }
+
+    &.outline {
+        border: 2px solid @green;
+        background-color: inherit;
+        color: @green;
+        .transition;
+
+        &:hover, &:focus, &:active &.active {
+            color: @light-green;
+            border-color: @light-green;
+            .transition;
+        }
+
+        &:active, &.active {
+            box-shadow: none;
+        }
+    }
 }
-.btn-default.outline:active, .btn-default.outline.active {
-    border-color: @light-gray;
-    color: @light-gray;
-    box-shadow: none;
+
+.btn-default {
     .transition;
+    
+    &.outline {
+        border: 2px solid @white;
+        color: @white;
+        .transition;
+
+        &:hover, &:focus {   
+            color: @primary-black;
+            border-color: @white;
+            background-color: @white;
+            .transition;
+        }
+
+        &:active, &.active {
+            border-color: @light-gray;
+            color: @light-gray;
+            box-shadow: none;
+            .transition;
+        }
+    }
+}
+
+.open {
+    .dropdown-toggle {
+        &.btn-primary {
+            color: @light-green;
+            border-color: @light-green;
+            .transition;
+        }
+
+        &.btn-default {
+            color: @primary-black;
+            border-color: @white;
+            background-color: @white;
+            .transition;
+        }
+    }
 }

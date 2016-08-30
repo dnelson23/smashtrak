@@ -1,0 +1,10 @@
+<% if(res.messages) { %>
+  <% for(var key = 0; key < res.messages.length; key++) { %>
+    <div class="row">
+      <div class="col-xs-6 col-offset-3 alert alert-dismissible alert-<%= res.messages[key].type %>">
+      	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= res.messages[key].body %>
+      </div>
+    </div>
+  <% } %>
+<% } %>

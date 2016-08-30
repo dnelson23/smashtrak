@@ -36,7 +36,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dnelson24/testApp.git"
+    "url": "git://github.com/dnelson24/smashtrack.git"
   },
   "author": "dnelson24",
   "license": "",

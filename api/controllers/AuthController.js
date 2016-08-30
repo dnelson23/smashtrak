@@ -26,10 +26,8 @@ module.exports = {
             }
             req.logIn(user, function(err) {
                 if (err) res.send(err);
-                return res.send({
-                    message: info.message,
-                    user: user
-                });
+                res.addMessage('success', 'Logged in successfully!');
+                return res.redirect('/');
             });
 
         })(req, res);
