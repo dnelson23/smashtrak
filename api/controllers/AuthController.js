@@ -26,7 +26,7 @@ module.exports = {
             }
             req.logIn(user, function(err) {
                 if (err) res.send(err);
-                res.addMessage('success', 'Logged in successfully!');
+                FlashService.success(req, 'Logged in successfully!');
                 return res.redirect('/');
             });
 

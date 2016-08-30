@@ -42,8 +42,5 @@ module.exports.routes = {
 
   '/logout': 'AuthController.logout',
 
-  'get /register': {
-    view: 'auth/register'
-  },
-  
+  'post /register' : 'UserController.create',  
 };
