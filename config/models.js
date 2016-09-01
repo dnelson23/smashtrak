@@ -29,8 +29,19 @@ module.exports.models = {
   ***************************************************************************/
   migrate: 'safe',
 
+  beforeUpdate: function(model, cb) {
+    if(model.autoUpdatedAt) {
+      model.updatedBy = req.user.id;
+    }
+    cb();
+  },
+
   beforeDestroy: function(model, cb) {
-    model.updatedAt = MysqlTimestamps.currentTimestamp();
-    model.save();
+    if(model.autoUpdatedAt) {
+      model.updatedAt = MysqlTimestamps.currentTimestamp();
+      model.save();
+    } else {
+      cb();
+    }
   }
 };
