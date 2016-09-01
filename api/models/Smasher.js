@@ -6,7 +6,7 @@
  * @description: Smasher model for storing player data
  */
 
- module.exports = {
+module.exports = {
  	tableName: 'Smashers',
 
  	attributes: {
@@ -41,4 +41,4 @@
 	 		return tourneys;
 	 	}
  	},
- }
+}

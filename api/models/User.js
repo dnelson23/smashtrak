@@ -32,6 +32,11 @@ module.exports = {
             via: 'user',
             through: 'communitymember'
         },
+        roles: {
+            collection: 'memberrole',
+            via: 'user',
+            through: 'userrole'
+        },
         toJSON: function() {
             var obj = this.toObject();
             delete obj.password;

@@ -3,11 +3,14 @@
  * Drew Nelson
  * Aug 29 2016
  *
- * @description: Member roles in relation to their communities
+ * @module			:: Model
+ * @description	:: Member roles in relation to their communities
  */
 
- module.exports = {
+module.exports = {
  	tableName: 'Member_Roles',
+ 	autoCreatedAt: false,
+ 	autoUpdatedAt: false,
 
  	attributes: {
  		role: {
@@ -19,4 +22,4 @@
  			type: 'string'
  		}
  	}
- }
+}
