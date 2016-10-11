@@ -20,10 +20,21 @@
  			type: 'int',
  			required: 'true'
  		},
+ 		description: {
+ 			type: 'string',
+ 		},
  		members: {
  			collection: 'user',
  			via: 'user',
  			through: 'communitymember'
+ 		},
+ 		tournaments: {
+ 			collection: 'tournament',
+ 			via: 'community'
+ 		},
+ 		smashers: {
+ 			collection: 'smasher',
+ 			via: 'community'
  		}
  	}
  }

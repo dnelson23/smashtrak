@@ -3,10 +3,11 @@
  * Drew Nelson
  * Aug 29 2016
  *
- * @description: Community model to house basic community information
+ * @module			:: Model
+ * @description	:: Community Member model for member information
  */
 
- module.exports = {
+module.exports = {
  	tableName: 'Community_Members',
 
  	attributes: {
@@ -15,6 +16,9 @@
  		},
  		user: {
  			model: 'user'
+ 		},
+ 		role: {
+ 			model: 'memberrole'
  		}
  	}
- }
+}

@@ -16,11 +16,11 @@
  			unique: false
  		},
  		community: {
- 			model: 'community',
+ 			model: 'community'
  		},
  		matches: {
- 			model: 'match',
+ 			collection: 'match',
  			via: 'tournament'
  		}
  	}
- }
+}

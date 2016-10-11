@@ -25,6 +25,7 @@ module.exports = {
         password: {
             type: 'string',
             minLength: 6,
+            unique: true,
             required: true
         },
         communities: {
@@ -33,9 +34,8 @@ module.exports = {
             through: 'communitymember'
         },
         roles: {
-            collection: 'memberrole',
-            via: 'user',
-            through: 'userrole'
+            collection: 'communitymember',
+            via: 'user'
         },
         toJSON: function() {
             var obj = this.toObject();
