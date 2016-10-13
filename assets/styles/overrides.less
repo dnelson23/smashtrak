@@ -46,7 +46,7 @@
 .navbar-default {
     min-height: 70px;
     border-color: @green;
-    background-color: rgba(0, 0, 0, 0.88);
+    background-color: rgba(0, 0, 0, 0.95);
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 8px;
@@ -81,6 +81,17 @@
 
     }
 
+}
+
+.panel {
+    background-color: inherit;
+}
+
+.panel-default {
+    .panel-heading {
+        color: @text-primary;
+        background-color: inherit;
+    }
 }
 
 .tab-content {

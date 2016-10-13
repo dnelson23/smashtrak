@@ -19,14 +19,14 @@ module.exports = {
 
 		passport.authenticate('local', function(err, user, info) {
             if ((err) || (!user)) {
-                return res.send({
-                    message: info.message,
-                    user: user
-                });
+                FlashService.error(req, info.message);
+                return res.redirect('back');
             }
             req.logIn(user, function(err) {
-                if (err) res.send(err);
-                FlashService.success(req, 'Logged in successfully!');
+                if (err) {
+                    res.negotiate(err);
+                }
+                FlashService.success(req, 'Logged in successfully.');
                 return res.redirect('/');
             });
 
@@ -35,6 +35,7 @@ module.exports = {
 
     logout: function(req, res) {
         req.logout();
+        FlashService.success(req, 'Logged out successfully');
         res.redirect('/');
     }
 };

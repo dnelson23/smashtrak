@@ -34,14 +34,20 @@ module.exports.routes = {
 
   '/': 'HomeController.index',
 
-  'get /login': {
-    view: 'auth/login'
-  },
-
   'post /login': 'AuthController.login',
 
-  '/logout': 'AuthController.logout',
+  'post /logout': 'AuthController.logout',
 
   'post /register' : 'UserController.create',
- 
+
+  // User account actions
+  'get /u/:username'              : 'UserController.edit',
+  'post /u/:username'             : 'UserController.update',
+  'get /u/:username/dashboard'    : 'UserController.dashboard',
+  'get /u/:username/communities'  : 'UserController.communities',
+
+  // Community Actions
+
+  'get /c/:id'          : 'CommunityController.find',
+  'post /c/:id/tournament'  : 'CommunityController.uploadTournament',
 };

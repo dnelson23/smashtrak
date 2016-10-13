@@ -26,24 +26,19 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': [true, 'flash',],
+  '*': ['flash', true],
 
   'PostController': {
     '*': ['flash', 'isAuthenticated']
   },
 
-  'UserController' : {
-    '*': ['flash'],
-    edit: ['isCurrentUser']
+  'UserController': {
+    '*': ['flash', 'isAuthenticated', 'isCurrentUser'],
   },
 
   'CommunityController' : {
     '*': ['flash', 'or(isInRole(\'Member\'), isCommunityPublic)'],
   },
-
-  'DashboardController': {
-    '*': ['flash', 'isAuthenticated'],
-  }
 
   /***************************************************************************
   *                                                                          *

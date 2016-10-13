@@ -1,8 +1,7 @@
 /**
  * HomeController
  *
- * @description :: Server-side logic for managing homes
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ * @description :: Manages public root pages
  */
 
 module.exports = {

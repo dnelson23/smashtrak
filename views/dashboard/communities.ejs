@@ -1,0 +1,19 @@
+<div class="communities-content">
+	<% if(communities) { %>
+			<% for(var i = 0; i < communities.length; i++) { %>
+			  <div class="panel panel-default">
+			    <div class="panel-heading btn full collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-controls="collapse<%= i %>" aria-expanded="false" role="tab" id="heading<%= i %>">
+			      <h4 class="panel-title"><%= communities[i].name %> <span class="glyphicon glyphicon-triangle-bottom"></span></h4>
+			    </div>
+			    <div id="collapse<%= i %>" class="panel-collapse collapsed in" role="tabpanel" aria-labelledby="heading<%= i %>" aria-expanded="false">
+			      <div class="panel-body">
+			        <p>Tournaments: <span class="green"><%= communities[i].tournaments.length %></span></p>
+			        <p><%= communities[i].tournaments[0].createdAt %></p>
+			        <p>Smashers Tracked: <span class="green"><%= communities[i].smashers.length %></span></p>
+			        <p><a class="btn btn-primary full outline">View Community</a></p>
+			      </div>
+			    </div>
+			  </div>
+			<% } %>
+	<% } %>
+</div>
