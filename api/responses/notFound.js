@@ -27,6 +27,9 @@ module.exports = function notFound (data, options) {
   // Set status code
   res.status(404);
 
+  // Add alert messages
+  res.locals.messages = { success: [], error: [], warning: [] };
+
   // Log error to console
   if (data !== undefined) {
     sails.log.verbose('Sending 404 ("Not Found") response: \n',data);
