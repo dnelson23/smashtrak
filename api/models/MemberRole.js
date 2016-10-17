@@ -13,8 +13,9 @@ module.exports = {
  	autoUpdatedAt: false,
 
  	attributes: {
- 		role: {
+ 		type: {
  			type: 'string',
+ 			columnName: 'role',
  			required: 'true',
  			unique: true
  		},

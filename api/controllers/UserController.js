@@ -5,6 +5,7 @@
  */
 
 module.exports = {
+
 	create: function(req, res) {
 		var pass = req.param('password'),
 				rePass = req.param('reenter-pass');
@@ -26,6 +27,10 @@ module.exports = {
 				}
 			});
 		}
+	},
+
+	edit: function(req, res) {
+
 	},
 
 	dashboard: function(req, res) {
@@ -56,4 +61,5 @@ module.exports = {
 				res.redirect('back');
 			});
 	}
+	
 };
