@@ -4,16 +4,22 @@
  * Sep 1 2016
  *
  * @module			:: Policy Factory
- * @description	:: Verifies the user has the passed role
+ * @description	:: Verifies the user has the passed role for the community or is an Admin
  */
 
 module.exports = function(role) {
  	return function(req, res, next) {
- 		var roles = req.user.roles;
- 		if(roles.indexof(role) >= 0) {
- 			return next();
- 		}
+ 		CommunityMember
+ 			.find({community: req.params.commID, user: req.user.id})
+ 			.populate('role')
+ 			.then(function(members) {
+ 				for(var i = 0; i < members.length; i++) {
+ 					if(members[i].role.type == role || members[i].role.type == 'Admin'){
+ 						return next();
+ 					}
+ 				}
 
- 		return res.forbidden('You do not have access to this page');
+ 				return res.forbidden();
+ 			});
  	}
 }

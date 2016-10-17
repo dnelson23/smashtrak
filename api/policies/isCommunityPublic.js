@@ -8,9 +8,16 @@
  */
 
 module.exports = function(req, res, next) {
-	Community.findOne({id: req.param('community')}).exec(function(err, com) {
+	Community
+	.findOne(req.params.commID)
+	.then(function(community) {
 		if(community.isPrivate) {
 			return res.notFound();
+		} else {
+			return next();
 		}
+	})
+	.catch(function(err) {
+		res.negotiate(err);
 	});
 };
