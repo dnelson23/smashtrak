@@ -26,3 +26,57 @@
         }
     }
 }
+
+.greenOutlineBtn {
+    background-color: @green;
+    border-color: @green;
+    color: @primary-black;
+
+    &:hover, &:focus, &:active, &.active {
+        background-color: @light-green;
+        border-color: @light-green;
+        color: @primary-black;
+        .transition;
+    }
+
+    &.outline {
+        border: 2px solid @green;
+        background-color: inherit;
+        color: @green;
+        .transition;
+
+        &:hover, &:focus, &:active &.active {
+            color: @light-green;
+            border-color: @light-green;
+            .transition;
+        }
+
+        &:active, &.active {
+            box-shadow: none;
+        }
+    }
+}
+
+.whiteOutlineBtn {
+    .transition;
+    
+    &.outline {
+        border: 2px solid @white;
+        color: @white;
+        .transition;
+
+        &:hover, &:focus {   
+            color: @primary-black;
+            border-color: @white;
+            background-color: @white;
+            .transition;
+        }
+
+        &:active, &.active {
+            border-color: @light-gray;
+            color: @light-gray;
+            box-shadow: none;
+            .transition;
+        }
+    }
+}

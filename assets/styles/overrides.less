@@ -14,29 +14,45 @@
 .nav-pills > li > a:hover {
     color: @challonge-orange;
     .transition;
+
+    &.btn-default{
+        .whiteOutlineBtn;
+    }
+
+    &.btn-primary {
+        .greenOutlineBtn;
+    }
 }
 
 .nav-tabs {
     &.nav-justified {
+        background-color: inherit;
         font-size: 18px;
 
-        li {
+        & > li {
             &.active {
                 a  {
                     color: @green;
-                    background-color: inherit;
                     border: none;
+                    background-color: inherit;
+
+                    & > span {
+                        padding-bottom: 4px;
+                        border-bottom: 2px solid @green;
+                    }
+
+                    &:hover {
+                        border: none;
+                    }
+
+                    &:focus {
+                        border: none;
+                    }
                 }
             }
 
             a {
                 color: @light-gray;
-                border: none;
-            }
-        }
-
-        .active {
-            a:hover {
                 border: none;
             }
         }
@@ -101,8 +117,12 @@
 }
 
 .well {
-    background-color: @black-quarter;
+    background-color: @black-half;
     border: 1px solid @white;
+
+    &.pre-scrollable {
+        max-height: 550px;
+    }
 }
 
 .form-control {
@@ -153,57 +173,11 @@
 }
 
 .btn-primary {
-    background-color: @green;
-    border-color: @green;
-    color: @primary-black;
-
-    &:hover, &:focus, &:active, &.active {
-        background-color: @light-green;
-        border-color: @light-green;
-        color: @primary-black;
-        .transition;
-    }
-
-    &.outline {
-        border: 2px solid @green;
-        background-color: inherit;
-        color: @green;
-        .transition;
-
-        &:hover, &:focus, &:active &.active {
-            color: @light-green;
-            border-color: @light-green;
-            .transition;
-        }
-
-        &:active, &.active {
-            box-shadow: none;
-        }
-    }
+    .greenOutlineBtn;
 }
 
 .btn-default {
-    .transition;
-    
-    &.outline {
-        border: 2px solid @white;
-        color: @white;
-        .transition;
-
-        &:hover, &:focus {   
-            color: @primary-black;
-            border-color: @white;
-            background-color: @white;
-            .transition;
-        }
-
-        &:active, &.active {
-            border-color: @light-gray;
-            color: @light-gray;
-            box-shadow: none;
-            .transition;
-        }
-    }
+    .whiteOutlineBtn;
 }
 
 .open {

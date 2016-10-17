@@ -14,7 +14,7 @@ a {
     color: @green;
     .transition;
     &:hover { color: @light-green; }
-    a:active { colo: @light-green; }
+    a:active { color: @light-green; }
 }
 
 section {
@@ -28,8 +28,24 @@ h1 {
 }
 
 body {
-    margin-bottom: 20px;
     .spanHeaders;
+}
+
+ul {
+    &.community-nav {
+        white-space: nowrap;
+        overflow-x: auto;
+
+        & li {
+            display: inline-block;
+            float: none;
+        }
+    }
+}
+
+.underline-green {
+    padding-bottom: 4px;
+    border-bottom: 2px solid @green;
 }
 
 .inline {
@@ -60,7 +76,6 @@ body {
 
 .container {
     padding-top: 90px;
-    padding-bottom: 3em;
 }
 
 .main-header {

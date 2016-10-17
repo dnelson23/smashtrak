@@ -1,0 +1,33 @@
+<div class="well well-lg">
+	<ul class="nav nav-tabs nav-justified" role="tablist">
+		<li role="presentation" class="active">
+			<a href="challonge-tab" aria-controls="challonge-tab" role="tab" data-toggle="tab"><span>By Challonge Link</span></a>
+		</li> 
+		<li role="presentation">
+			<a href="smashgg-tab" aria-controls="smashgg-tab" role="tab" data-toggle="tab"><span>By Shash.gg Link</span></a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="challonge-tab">
+			<form method="POST" action="/c/<%= community.id %>/upload">
+				<input type="hidden" name="type" value="challonge" />
+				<div class="form-group">
+					<label for="subdomain" class="control-label">Tournament Subdomain</label>
+          <input type="text" name="subdomain" class="form-control" placeholder="URL Subdomain" />
+        </div>
+        <div class="form-group">
+        	<label for="tournament" class="control-label">Tournament Name</label>
+        	<input type="text" name="tournament" class="form-control" placeholder="Tournament" />
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary outline">Upload Challonge Tournament</button>
+			</form>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="smashgg-tab">
+			<form method="POST" action="/c/<%= community.id %>/upload">
+				<input type="hidden" name="type" value="smashgg" />
+				<h1>Smash.gg uploads coming soon!</h1>
+				<button type="submit" class="btn btn-lg btn-primary outline" disabled="disabled">Upload Smash.gg Tournament</button>
+			</form>
+		</div>
+	</div>
+</div>

@@ -10,7 +10,7 @@
 			        <p>Tournaments: <span class="green"><%= communities[i].tournaments.length %></span></p>
 			        <p><%= communities[i].tournaments[0].createdAt %></p>
 			        <p>Smashers Tracked: <span class="green"><%= communities[i].smashers.length %></span></p>
-			        <p><a class="btn btn-primary full outline">View Community</a></p>
+			        <p><a href="/c/<%= communities[i].id %>" class="btn btn-primary full outline">View Community</a></p>
 			      </div>
 			    </div>
 			  </div>

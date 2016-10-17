@@ -20,7 +20,9 @@
       <div class="row">
         <div id="main-container" class="col-xs-12">
           <%- body %>
-          <%- partial('partials/_loginModal.ejs') %>
+          <% if(!req.user) { %>
+            <%- partial('partials/_loginModal.ejs') %>
+          <% } %>
           <!--SCRIPTS-->
           <script src="/js/dependencies/sails.io.js"></script>
           <script src="/js/dependencies/jquery/jquery.min.js"></script>

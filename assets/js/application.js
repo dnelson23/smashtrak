@@ -53,6 +53,6 @@ $(document).ready(function() {
 		$('#login-modal').modal('show');
 	});
 
-	// close alerts after 10 seconds
-	setTimeout(function() { dismissAlerts(); }, 10000);
+	// close alerts after 5 seconds
+	setTimeout(function() { dismissAlerts(); }, 5000);
 });
