@@ -40,14 +40,14 @@ module.exports.routes = {
 
   'post /register' : 'UserController.create',
 
-  // User account actions
+  // User account Routes
   'get /u/:username'              : 'UserController.edit',
   'post /u/:username'             : 'UserController.update',
   'get /u/:username/dashboard'    : 'UserController.dashboard',
   'get /u/:username/communities'  : 'UserController.communities',
 
-  // Community Actions
-
-  'get /c/:id'          : 'CommunityController.find',
-  'post /c/:id/tournament'  : 'CommunityController.uploadTournament',
+  // Community Routes
+  'get /c/:commID'                    : 'CommunityController.find',
+  'get /c/:commID/tournament/upload'  : 'TournamentController.new',
+  'post /c/:commID/tournament/upload' : 'TournamentController.create',
 };

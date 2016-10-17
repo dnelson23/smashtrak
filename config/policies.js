@@ -26,7 +26,11 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ['flash', true],
+  '*': [true, 'flash'],
+
+  'GetController' : {
+    '*': ['flash']
+  },
 
   'PostController': {
     '*': ['flash', 'isAuthenticated']
@@ -37,7 +41,7 @@ module.exports.policies = {
   },
 
   'CommunityController' : {
-    '*': ['flash', 'or(isInRole(\'Member\'), isCommunityPublic)'],
+    '*': ['flash', 'isAuthenticated', 'or(isInRole(\'Member\'), isCommunityPublic)'],
   },
 
   /***************************************************************************
