@@ -48,6 +48,6 @@ module.exports.routes = {
 
   // Community Routes
   'get /c/:commID'                    : 'CommunityController.find',
-  'get /c/:commID/tournament/upload'  : 'TournamentController.new',
-  'post /c/:commID/tournament/upload' : 'TournamentController.create',
+  'get /c/:commID/tournament/new'     : 'TournamentController.new',
+  'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
 };
