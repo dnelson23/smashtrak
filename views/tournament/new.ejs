@@ -9,7 +9,7 @@
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="challonge-tab">
-			<form method="POST" action="/c/<%= community.id %>/upload">
+			<form method="POST" action="/c/<%= community.id %>/tournament/new">
 				<input type="hidden" name="type" value="challonge" />
 				<div class="form-group">
 					<label for="subdomain" class="control-label">Tournament Subdomain</label>
@@ -23,7 +23,7 @@
 			</form>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="smashgg-tab">
-			<form method="POST" action="/c/<%= community.id %>/upload">
+			<form method="POST" action="/c/<%= community.id %>/tournament/new">
 				<input type="hidden" name="type" value="smashgg" />
 				<h1>Smash.gg uploads coming soon!</h1>
 				<button type="submit" class="btn btn-lg btn-primary outline" disabled="disabled">Upload Smash.gg Tournament</button>

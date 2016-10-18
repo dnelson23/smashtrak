@@ -1,17 +1,12 @@
 function validateNewPassword() {
 	var confirmPass = $('#confirm-pass'),
 			pass = $('#password');
-	if(isNullorWhitespace(confirmPass.val()) || isNullorWhitespace(pass.val()))
-	{
+	if(isNullorWhitespace(confirmPass.val()) || isNullorWhitespace(pass.val())) {
 		return;
-	}
-	else if(confirmPass.val() != pass.val())
-	{
+	} else if(confirmPass.val() != pass.val()) {
 		confirmPass.parent().addClass('has-error');
 		pass.parent().addClass('has-error');
-	}
-	else
-	{
+	} else {
 		confirmPass.parent().removeClass('has-error');
 		confirmPass.parent().addClass('has-success');
 		pass.parent().removeClass('has-error');
@@ -20,18 +15,15 @@ function validateNewPassword() {
 }
 
 function isNullorWhitespace(string) {
-	if(string === '' || string == null)
-	{
+	if(string === '' || string == null) {
 		return true;
-	}
-	else
-	{
+	} else {
 		return false;
 	}
 }
 
 function dismissAlerts() {
-	$('.alert').alert('close');
+	$('.alert-dismissible').alert('close');
 }
 
 $(document).ready(function() {
@@ -55,4 +47,16 @@ $(document).ready(function() {
 
 	// close alerts after 5 seconds
 	setTimeout(function() { dismissAlerts(); }, 5000);
+
+	// change accordian caret glyphicons on click
+	$('.panel-heading').click(function(event) {
+  	var caret = $(this).find("span");
+  	if(caret.hasClass('glyphicon-menu-down')) {
+  		caret.removeClass('glyphicon-menu-down');
+  		caret.addClass('glyphicon-menu-up');
+  	} else if(caret.hasClass('glyphicon-menu-up')) {
+  		caret.removeClass('glyphicon-menu-up');
+  		caret.addClass('glyphicon-menu-down');
+  	}
+	});
 });

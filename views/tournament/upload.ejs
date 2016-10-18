@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-xs-6"><h1>Upload Matches</h1></div>
+  <div class="col-xs-3 text-right"><button type="button" class="btn btn-default outline" data-toggle="modal" data-target=".help-modal">Show Help</button></div>
+  <div class="clearfix"></div>
+  <div class="col-md-9 well well-lg">
+    <h2><%= tournament["name"] %></h2>
+    <br />
+    <div id="smasher-table">
+      <form method="POST" action="/c/<%= req.params.commID %>/tournament/create" class="form-horizontal">
+        <input type="hidden" name="tournament_name" value="<%= tournament["name"] %>" />
+        <input type="hidden" name="tournament_id" value="<%= tournament["id"] %>" />
+        <input type="hidden" name="tournament_type" value="<%= type %>" />
+        <% for(var s = 0; s < smashers.length; s++) { %>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <label for="smashers[][name]" class="control-label col-xs-1">Smasher</label>
+                <div class="col-xs-5">
+                  <input type="text" id="smashers[][name]" name="smashers[][name]" class="form-control" 
+                  value="<%= smashers[s]["participant"]["name"] %>" />
+                </div>
+                <% if(true) { %>
+                  <div class="col-xs-1 tag-status">
+                    <span class="glyphicon glyphicon-warning-sign alert alert-player alert-warning" aria-hidden="true"></span>
+                  </div>
+                <% } else { %>
+                  <div class="col-xs-1 tag-status">
+                    <span class="glyphicon glyphicon-ok alert alert-player alert-info" aria-hidden="true"></span>
+                  </div>
+                <% } %>
+                <div class="col-xs-2">
+                  <p>Final Rank: <%= smashers[s]["participant"]["final_rank"] %></p>
+                </div>
+                <input type="hidden" name="smashers[][id]" value="<%= smashers[s]["participant"]["id"] %>" />
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-xs-11 col-xs-offset-1">
+                <h3><%= smashers[s]["participant"]["name"] %>'s Matches <a class="panel-heading" role="button" data-toggle="collapse" href="#smasher_<%= s %>_matches" aria-expanded="false" aria-controls="smasher_<%= s %>_matches">
+                	<span class="glyphicon glyphicon-menu-up"></span>
+                </a></h3>
+                <div class="col-xs-12 collapse" id="smasher_<%= s %>_matches">
+                  <% for(var m = 0; m < matches.length; m++) { %>
+                    <% if(matches[m]["match"]["winner_id"] == smashers[s]["participant"]["id"]) { %>
+                      <% for(var l = 0; l < smashers.length; l++) { %>
+                        <% if(smashers[l]["participant"]["id"] == matches[m]["match"]["loser_id"]) { %>
+                          <p>Win over <%= smashers[l]["participant"]["name"] %></p>
+                        <% } %>
+                      <% } %>
+                    <% } else if(matches[m]["match"]["loser_id"] == smashers[s]["participant"]["id"]) { %>
+                      <% for(var w = 0; w < smashers.length; w++) { %>
+                        <% if(smashers[w]["participant"]["id"] == matches[m]["match"]["winner_id"]) { %>
+                          <p>Loss to <%= smashers[w]["participant"]["name"] %></p>
+                        <% } %>
+                      <% } %>
+                    <% } %>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        <% for(var m = 0; m < matches.length; m++) { %>
+          <input type="hidden" name="matches[][winner_id]" value="<%= matches[m]["match"]["winner_id"] %>" />
+          <input type="hidden" name="matches[][loser_id]" value="<%= matches[m]["match"]["loser_id"] %>" />
+        <% } %>
+        <div class="col-xs-12 text-right">
+          <button type="submit" class="btn btn-primary btn-lg outline" onkeypress="return event.keyCode != 13;">Save All</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <h3>Search for Smasher</h3>
+    <input type="text" class="form-control" placeholder="Press Enter to search tag" id="search-smashers" disabled />
+    <br />
+    <div id="search-list" class="col-xs-12">
+      <p>Coming Soon</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade help-modal" tabindex="-1" role="dialog" aria-labelledby="uploadTournamentHelp">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+      <h4>Uploading Tournament Matches</h4>
+    </div>
+    <div class="modal-body">
+      <p>Players tags are loaded into the text fields as they were entered into the Challonge bracket.</p>
+      <p>Players whose tags are already in the database will have a <span class="glyphicon glyphicon-ok alert alert-player alert-info text-center" aria-hidden="true"></span> next to the box.</p>
+      <p>If a players tag does not exist already you will see <span class="glyphicon glyphicon-warning-sign alert alert-player alert-warning text-center" aria-hidden="true"></span></p>
+      <p>Feel free to change players tags in order to conform to previously uploaded matches and tournaments. Use the search box to the right to find any player already in the database. Don't worry, all matches from this tournament will be linked to the new tag.</p>
+      <p>When changing a players tag SmashMountain will search for the new tag in the database, tags entered here are case sensetive. If it exists the warning will change to a <span class="glyphicon glyphicon-ok alert alert-player alert-success text-center" aria-hidden="true"></span>.</p>
+      <p><span class="glyphicon glyphicon-alert"></span> Use tab to switch between input fields and check tags.</p>
+      <p>Once you are satisfied with the players tags scroll to the bottom and press the Save All button.</p>
+  </div>
+</div>
+</div>
