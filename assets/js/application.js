@@ -26,7 +26,18 @@ function dismissAlerts() {
 	$('.alert-dismissible').alert('close');
 }
 
+function resize() {
+  var heights = window.innerHeight;
+  $('.scrollable').css('max-height', heights - 176);
+}
+
 $(document).ready(function() {
+
+  resize();
+  window.onresize = function() {
+    resize();
+  };
+
 	$('#confirm-pass').bind('change', validateNewPassword);
 	$('#password').bind('change', validateNewPassword);
 
