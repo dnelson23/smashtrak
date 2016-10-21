@@ -45,7 +45,8 @@ module.exports.policies = {
   },
 
   'TournamentController' : {
-    '*': ['flash', 'isAuthenticated', 'isInRole(\'Admin\')']
+    '*'     : ['flash', 'isAuthenticated', 'isInRole(\'Admin\')'],
+    'show'  : ['flash', 'isAuthenticated', 'isInRole(\'Member\')'],
   }
 
   /***************************************************************************

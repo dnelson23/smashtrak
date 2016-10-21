@@ -46,9 +46,10 @@ module.exports.routes = {
   'get /u/:username/dashboard'    : 'UserController.dashboard',
   'get /u/:username/communities'  : 'UserController.communities',
 
-  // Community Routes
+  // Community/Tournament Routes
   'get /c/:commID'                    : 'CommunityController.find',
   'get /c/:commID/tournament/new'     : 'TournamentController.new',
   'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
   'post /c/:commID/tournament/create' : 'TournamentController.create',
+  'get /c/:commID/tournament/:tID'    : 'TournamentController.show',
 };
