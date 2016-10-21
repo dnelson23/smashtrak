@@ -18,7 +18,9 @@
  		},
  		tournament: {
  			model: 'tournament'
- 		}
+ 		},
+ 		createdBy: { type: 'integer' },
+ 		updatedBy: { type: 'integer' }
  	}
  }
  

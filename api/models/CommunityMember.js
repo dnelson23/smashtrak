@@ -19,6 +19,8 @@ module.exports = {
  		},
  		role: {
  			model: 'memberrole'
- 		}
+ 		},
+ 		createdBy: { type: 'integer' },
+ 		updatedBy: { type: 'integer' }
  	}
 }

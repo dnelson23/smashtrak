@@ -18,9 +18,23 @@
  		community: {
  			model: 'community'
  		},
+ 		type: {
+ 			type: 'string',
+ 			enum: ['challonge', 'smash.gg'],
+ 			required: 'true',
+ 		},
+ 		url: {
+ 			type: 'string',
+ 			required: 'true',
+ 		},
+ 		date: {
+ 			type: 'datetime'
+ 		},
  		matches: {
  			collection: 'match',
  			via: 'tournament'
- 		}
+ 		},
+ 		createdBy: { type: 'integer', required: true },
+ 		updatedBy: { type: 'integer', required: true }
  	}
 }

@@ -3,20 +3,23 @@
   <div class="col-xs-3 text-right"><button type="button" class="btn btn-default outline" data-toggle="modal" data-target=".help-modal">Show Help</button></div>
   <div class="clearfix"></div>
   <div class="col-md-9 well well-lg">
-    <h2><%= tournament["name"] %></h2>
+    <h2><%= tName %></h2>
     <br />
     <div id="smasher-table">
       <form method="POST" action="/c/<%= req.params.commID %>/tournament/create" class="form-horizontal">
-        <input type="hidden" name="tournament_name" value="<%= tournament["name"] %>" />
-        <input type="hidden" name="tournament_id" value="<%= tournament["id"] %>" />
-        <input type="hidden" name="tournament_type" value="<%= type %>" />
+        <input type="hidden" name="tournament[name]" value="<%= tName %>" />
+        <input type="hidden" name="tournament[community]" value="<%= tCommunity %>" />
+        <input type="hidden" name="tournament[type]" value="<%= tType %>" />
+        <input type="hidden" name="tournament[url]" value="<%= tUrl %>" />
+        <input type="hidden" name="tournament[date]" value="<%= tDate %>" />
+        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
         <% for(var s = 0; s < smashers.length; s++) { %>
           <div class="row">
             <div class="form-group">
               <div class="col-xs-12">
-                <label for="smashers[][name]" class="control-label col-xs-1">Smasher</label>
+                <label for="smashers[<%= s %>][tag]" class="control-label col-xs-1">Smasher</label>
                 <div class="col-xs-5">
-                  <input type="text" id="smashers[][name]" name="smashers[][name]" class="form-control" 
+                  <input type="text" id="smashers[<%= s %>][tag]" name="smashers[<%= s %>][tag]" class="form-control" 
                   value="<%= smashers[s]["participant"]["name"] %>" />
                 </div>
                 <% if(true) { %>
@@ -31,7 +34,7 @@
                 <div class="col-xs-2">
                   <p>Final Rank: <%= smashers[s]["participant"]["final_rank"] %></p>
                 </div>
-                <input type="hidden" name="smashers[][id]" value="<%= smashers[s]["participant"]["id"] %>" />
+                <input type="hidden" name="smashers[<%= s %>][id]" value="<%= smashers[s]["participant"]["id"] %>" />
                 <div class="clearfix"></div>
               </div>
               <div class="col-xs-11 col-xs-offset-1">
@@ -60,8 +63,8 @@
           </div>
         <% } %>
         <% for(var m = 0; m < matches.length; m++) { %>
-          <input type="hidden" name="matches[][winner_id]" value="<%= matches[m]["match"]["winner_id"] %>" />
-          <input type="hidden" name="matches[][loser_id]" value="<%= matches[m]["match"]["loser_id"] %>" />
+          <input type="hidden" name="matches[<%= m %>][winner]" value="<%= matches[m]["match"]["winner_id"] %>" />
+          <input type="hidden" name="matches[<%= m %>][loser]" value="<%= matches[m]["match"]["loser_id"] %>" />
         <% } %>
         <div class="col-xs-12 text-right">
           <button type="submit" class="btn btn-primary btn-lg outline" onkeypress="return event.keyCode != 13;">Save All</button>

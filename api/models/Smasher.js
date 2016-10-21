@@ -25,6 +25,8 @@ module.exports = {
  		community: {
  			model: 'community'
  		},
+ 		createdBy: { type: 'integer' },
+ 		updatedBy: { type: 'integer' },
  		sets: function(opts, cb) {
 			Match.find({or: [{winner_id: this.id}, {loser_id: this.id}]}).exec(function(err, retSets) {
 				if(err) {

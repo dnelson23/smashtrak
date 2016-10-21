@@ -10,6 +10,7 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="login-tab">
             <form method="POST" action="/login">
+              <input type="hidden" name="_csrf" value="<%= _csrf %>" />
               <div class="field form-group">
                 <div class="input-group">
                   <div class="input-group-addon">@</div>
@@ -30,6 +31,7 @@
               <div class="col-xs-12">
                 <form method="POST" action="/register">
                   <div class="field form-group">
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
                     <label for="email">E-mail:</label>
                     <div class="input-group">
                       <div class="input-group-addon">@</div>

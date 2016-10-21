@@ -35,6 +35,8 @@
  		smashers: {
  			collection: 'smasher',
  			via: 'community'
- 		}
+ 		},
+ 		createdBy: { type: 'integer' },
+ 		updatedBy: { type: 'integer' }
  	}
  }

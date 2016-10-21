@@ -50,4 +50,5 @@ module.exports.routes = {
   'get /c/:commID'                    : 'CommunityController.find',
   'get /c/:commID/tournament/new'     : 'TournamentController.new',
   'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
+  'post /c/:commID/tournament/create' : 'TournamentController.create',
 };

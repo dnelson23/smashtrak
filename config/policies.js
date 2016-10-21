@@ -44,6 +44,10 @@ module.exports.policies = {
     '*': ['flash', 'isAuthenticated', 'or(isInRole(\'Member\'), isCommunityPublic)'],
   },
 
+  'TournamentController' : {
+    '*': ['flash', 'isAuthenticated', 'isInRole(\'Admin\')']
+  }
+
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
