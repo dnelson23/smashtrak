@@ -9,6 +9,30 @@
  module.exports = {
 
   show: function(req, res) {
+    Tournament
+    .findOne(req.params.tID)
+    .populate('community')
+    .populate('matches')
+    .then(function(tourney) {
+      if(!tourney) return res.notFound('Whoops, we SD\'ed trying to find that tournament.');
+
+      var smashers = [];
+      tourney.matches.forEach(function(m) {
+        if(smashers.indexOf(m.winner) == -1) smashers.push(m.winner);
+        if(smashers.indexOf(m.loser) == -1) smashers.push(m.loser);
+      });
+
+      Smasher
+      .find(smashers)
+      .exec(function(err, s) {
+        if(err) return res.negotiate(err);
+
+        return res.view('tournament/index', { tournament: tourney, smashers: s });
+      });
+    })
+    .catch(function(err) {
+      if(err) res.negotiate(err);
+    });
   },
 
  	new: function(req, res) {
