@@ -4,22 +4,18 @@
  * Sep 1 2016
  *
  * @module			:: Policy Factory
- * @description	:: Verifies the user has the passed role for the community or is an Admin
+ * @description	:: Verifies user has requested role, designed mainly for SuperUsers at the moment
  */
 
 module.exports = function(role) {
  	return function(req, res, next) {
- 		CommunityMember
- 			.find({community: req.params.commID, user: req.user.id})
- 			.populate('role')
- 			.then(function(members) {
- 				for(var i = 0; i < members.length; i++) {
- 					if(members[i].role.type == role || members[i].role.type == 'Admin'){
- 						return next();
- 					}
- 				}
+ 		var roles = {Admin: 1, Member: 2, SuperUser: 3};
 
- 				return res.forbidden();
+ 		CommunityMember
+ 			.find({ user: req.user.id, role: roles[role] })
+ 			.then(function(members) {
+ 				if(members) return next();
+ 				else return res.forbidden();
  			});
  	}
 }
