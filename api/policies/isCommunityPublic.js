@@ -11,13 +11,13 @@ module.exports = function(req, res, next) {
 	Community
 	.findOne(req.params.commID)
 	.then(function(community) {
-		if(community.isPrivate) {
-			return res.notFound();
-		} else {
+		if(community && !community.isPrivate) {
 			return next();
+		} else {
+			return res.notFound();
 		}
 	})
 	.catch(function(err) {
-		res.negotiate(err);
+		return res.negotiate(err);
 	});
 };
