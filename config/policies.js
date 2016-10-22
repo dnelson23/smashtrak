@@ -37,7 +37,8 @@ module.exports.policies = {
   },
 
   'UserController': {
-    '*': ['flash', 'isAuthenticated', 'isCurrentUser'],
+    '*'       : ['flash', 'isAuthenticated', 'isCurrentUser'],
+    'create'  : ['flash'],
   },
 
   'CommunityController' : {
