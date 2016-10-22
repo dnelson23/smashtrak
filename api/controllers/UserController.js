@@ -12,18 +12,22 @@ module.exports = {
 
 		if(pass !== rePass) {
 			FlashService.error(req, 'Passwords do not match');
-			res.redirect('back');
+			return res.redirect('back');
 		} else {
+			if(pass.length < 6) {
+				FlashService.error(req, 'Password must be at least 6 characters.');
+				return res.redirect('back');
+			}
 			User.create({
 				email: req.param('email'),
 				username: req.param('username'),
 				password: req.param('password')
 			}).exec(function(err, user) {
 				if(err) {
-					res.negotiate(err);
+					return res.negotiate(err);
 				} else {
 					FlashService.success(req, 'Registration Complete');
-					res.redirect('/');
+					return res.redirect('/');
 				}
 			});
 		}
