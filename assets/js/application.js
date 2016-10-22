@@ -28,7 +28,7 @@ function dismissAlerts() {
 
 function resize() {
   var heights = window.innerHeight;
-  $('.scrollable').css('max-height', heights - 176);
+  $('.scrollable').css('max-height', heights - 106);
 }
 
 $(document).ready(function() {
