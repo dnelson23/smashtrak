@@ -18,7 +18,7 @@
           <li><a href="/u/<%= req.user.username %>/communities">My Communities</a></li>
           <li><a href="#" id="logout-button">Logout</a></li>
           <li><p class="navbar-text">Signed in as <a href="/u/<%= req.user.username %>" class="navbar-link"><%= req.user.username %></a></p></li>
-          <form method="POST" action="/logout" id="logout-form"></form>
+          <form method="POST" action="/logout" id="logout-form"><input type="hidden" name="_csrf" value="<%= _csrf %>" /></form>
         <% } else { %>
           <li><a href="#" data-toggle="modal" data-target="#login-modal">Login/Register</a></li>
         <% } %>
