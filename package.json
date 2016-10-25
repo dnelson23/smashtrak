@@ -1,8 +1,8 @@
 {
-  "name": "testApp",
+  "name": "Smash Tracker",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "A regional tracking application for Super Smash Brothers communities.",
   "keywords": [],
   "dependencies": {
     "bcrypt": "~0.8.0",
@@ -41,6 +41,6 @@
     "url": "git://github.com/dnelson24/smashtrack.git"
   },
   "author": "dnelson24",
-  "license": "",
+  "license": "MIT",
   "devDependencies": {}
 }
