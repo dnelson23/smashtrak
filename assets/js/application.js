@@ -28,12 +28,13 @@ function dismissAlerts() {
 
 function resize() {
   var heights = window.innerHeight;
-  $('.scrollable').css('max-height', heights - 246);
+  if(heights < 740) $('.scrollable').css('max-height', heights - 246);
+  else $('.scrollable').removeClass('scrollable');
 }
 
 $(document).ready(function() {
 
-  resize();
+	resize();
   window.onresize = function() {
     resize();
   };

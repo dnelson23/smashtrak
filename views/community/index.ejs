@@ -7,7 +7,7 @@
 <div class="well community-content scrollable">
 	<div class="row">
 		<div class="col-sm-3 hidden-xs">
-		  <ul class="nav nav-pills nav-stacked">
+		  <ul class="nav nav-pills nav-stacked affix">
 		    <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
 		    <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
 		    <li><a data-toggle="pill" href="#smashers">Smashers</a></li>
@@ -15,14 +15,14 @@
 		  </ul>
 		</div>
 		<div class="col-xs-12 col-sm-9">
-			<p><h1><span class="underline-green"><%= community.name %></span></h1></p>
-			<div class="row">
-				<div id="tournaments" class="col-xs-12">
+			<h1><span class="underline-green community-title"><%= community.name %></span></h1>
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tournaments" class="col-xs-12">
 					<% for(var i = 0; i < community.tournaments.length; i++) { %>
 						<h3><%= community.tournaments[i].name %></h3>
 					<% } %>
 				</div>
-				<div id="smashers" class="col-xs-12">
+				<div class="tab-pane fade" id="smashers" class="col-xs-12">
 					<% for(var i = 0; i < community.smashers.length; i++) { %>
 						<h3><%= community.smashers[i].tag %></h3>
 					<% } %>

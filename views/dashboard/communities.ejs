@@ -1,4 +1,5 @@
 <div class="communities-content">
+	<a href="/communities/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create New Community</a>
 	<% if(communities) { %>
 			<% for(var i = 0; i < communities.length; i++) { %>
 			  <div class="panel panel-default">
@@ -10,7 +11,7 @@
 			        <p>Tournaments: <span class="green"><%= communities[i].tournaments.length %></span></p>
 			        <p><%= communities[i].tournaments[0].createdAt %></p>
 			        <p>Smashers Tracked: <span class="green"><%= communities[i].smashers.length %></span></p>
-			        <p><a href="/c/<%= communities[i].id %>" class="btn btn-primary full outline">View Community</a></p>
+			        <a href="/c/<%= communities[i].id %>" class="btn btn-primary full outline">View Community</a>
 			      </div>
 			    </div>
 			  </div>
