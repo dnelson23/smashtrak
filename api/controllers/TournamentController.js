@@ -111,7 +111,7 @@
         .exec(function(err, s) {
           if(err) return mapCb(err);
 
-          return mapCb(null, { challonge_id: smasher.id, smasher: s });
+          return mapCb(null, { challonge_id: smasher.id, smasher: s, placing: smasher.place });
         });
       }, function(err, smashers) {
         if(err) return res.negotiate(err);
@@ -129,13 +129,32 @@
             return match;
           });
 
-          // finally commit the matches and redirect to tournament
+          // build our placings objects to create
+          var placings = smashers.map(function(smasher) {
+            return {
+              tournament: tourney.id,
+              smasher: smasher.smasher.id,
+              place: smasher.placing,
+              createdBy: req.user.id,
+              updatedBy: req.user.id
+            };
+          });
+
+          // finally commit the matches and placings and redirect to tournament
           Match
           .create(matchesParams)
-          .exec(function(err, mObjs) {
+          .then(function(mObjs) {
+            Placing
+            .create(placings)
+            .then(function(pObjs) {
+              return res.redirect('/c/' + tourney.community + '/tournament/' + tourney.id);
+            })
+            .catch(function(err) {
+              if(err) return res.negotiate(err);
+            });
+          })
+          .catch(function(err) {
             if(err) return res.negotiate(err);
-
-            return res.redirect('/c/' + tournament.community + '/tournament/' + tournament.id);
           });
         }
       });

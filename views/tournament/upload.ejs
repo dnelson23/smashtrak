@@ -32,7 +32,8 @@
                   </div>
                 <% } %>
                 <div class="col-xs-2">
-                  <p>Final Rank: <%= smashers[s]["participant"]["final_rank"] %></p>
+                  <p>Final Placing: <%= smashers[s]["participant"]["final_rank"] %></p>
+                  <input type="hidden" name="smashers[<%= s %>][place]" value="<%= smashers[s]["participant"]["final_rank"] %>" />
                 </div>
                 <input type="hidden" name="smashers[<%= s %>][id]" value="<%= smashers[s]["participant"]["id"] %>" />
                 <div class="clearfix"></div>

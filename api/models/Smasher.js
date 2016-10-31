@@ -25,26 +25,11 @@ module.exports = {
  		community: {
  			model: 'community'
  		},
+ 		placings: {
+ 			collection: 'placing',
+ 			via: 'smasher'
+ 		},
  		createdBy: { type: 'integer' },
  		updatedBy: { type: 'integer' },
- 		sets: function(opts, cb) {
-			Match.find({or: [{winner_id: this.id}, {loser_id: this.id}]}).exec(function(err, retSets) {
-				if(err) {
-					return res.negotiate(err);
-				} else {
-					return retSets;
-				}
-			});
-		},
-	 	tournaments: function(opts, cb) {
-	 		var tourneys = Array();
-	 		for(var set in this.sets) {
-	 			if(!tourneys.includes(set)) {
-	 				tourneys.push(set);
-	 			}
-	 		}
-	 		return tourneys;
-	 	}
  	},
-
 }
