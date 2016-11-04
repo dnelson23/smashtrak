@@ -36,6 +36,9 @@
  			via: 'community'
  		},
  		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' }
+ 		updatedBy: { type: 'integer' },
+ 		shortDescription: function() {
+ 			return this.description.substring(0, 30);
+ 		}
  	}
  }

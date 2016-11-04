@@ -2,13 +2,13 @@
   <div class="col-xs-6"><h1>Upload Matches</h1></div>
   <div class="col-xs-3 text-right"><button type="button" class="btn btn-default outline" data-toggle="modal" data-target=".help-modal">Show Help</button></div>
   <div class="clearfix"></div>
-  <div class="col-md-9 well well-lg">
+  <div class="col-sm-9 col-xs-12 well well-lg">
     <h2><%= tName %></h2>
     <br />
     <div id="smasher-table">
       <form method="POST" action="/c/<%= req.params.commID %>/tournament/create" class="form-horizontal">
         <input type="hidden" name="tournament[name]" value="<%= tName %>" />
-        <input type="hidden" name="tournament[community]" value="<%= tCommunity %>" />
+        <input type="hidden" id="community_id" name="tournament[community]" value="<%= tCommunity %>" />
         <input type="hidden" name="tournament[type]" value="<%= tType %>" />
         <input type="hidden" name="tournament[url]" value="<%= tUrl %>" />
         <input type="hidden" name="tournament[date]" value="<%= tDate %>" />
@@ -19,16 +19,16 @@
               <div class="col-xs-12">
                 <label for="smashers[<%= s %>][tag]" class="control-label col-xs-1">Smasher</label>
                 <div class="col-xs-5">
-                  <input type="text" id="smashers[<%= s %>][tag]" name="smashers[<%= s %>][tag]" class="form-control" 
+                  <input type="text" id="smashers[<%= s %>][tag]" name="smashers[<%= s %>][tag]" class="form-control tag-upload" 
                   value="<%= smashers[s]["participant"]["name"] %>" />
                 </div>
-                <% if(true) { %>
-                  <div class="col-xs-1 tag-status">
-                    <span class="glyphicon glyphicon-warning-sign alert alert-player alert-warning" aria-hidden="true"></span>
+                <% if(allSmashers.indexOf(smashers[s]["participant"]["name"]) === -1) { %>
+                  <div class="col-xs-1">
+                    <span class="tag-status glyphicon glyphicon-warning-sign alert alert-player alert-warning" aria-hidden="true"></span>
                   </div>
                 <% } else { %>
-                  <div class="col-xs-1 tag-status">
-                    <span class="glyphicon glyphicon-ok alert alert-player alert-info" aria-hidden="true"></span>
+                  <div class="col-xs-1">
+                    <span class="tag-status glyphicon glyphicon-ok alert alert-player alert-success" aria-hidden="true"></span>
                   </div>
                 <% } %>
                 <div class="col-xs-2">
@@ -73,12 +73,16 @@
       </form>
     </div>
   </div>
-  <div class="col-xs-3">
+  <div class="col-sm-3 col-xs-12">
     <h3>Search for Smasher</h3>
-    <input type="text" class="form-control" placeholder="Press Enter to search tag" id="search-smashers" disabled />
+    <input type="text" class="form-control" placeholder="Press Enter to search tags" id="search-smashers" />
     <br />
-    <div id="search-list" class="col-xs-12">
-      <p>Coming Soon</p>
+    <div class="row">
+      <div id="search-list" class="col-xs-12">
+        <% for(var i = 0; i < allSmashers.length; i++) { %>
+          <p class="smasher" ><%= allSmashers[i] %></p>
+        <% } %>
+      </div>
     </div>
   </div>
 </div>
@@ -92,10 +96,11 @@
     </div>
     <div class="modal-body">
       <p>Players tags are loaded into the text fields as they were entered into the Challonge bracket.</p>
-      <p>Players whose tags are already in the database will have a <span class="glyphicon glyphicon-ok alert alert-player alert-info text-center" aria-hidden="true"></span> next to the box.</p>
+      <p>Players whose tags are already in the database will have a <span class="glyphicon glyphicon-ok alert alert-player alert-success text-center" aria-hidden="true"></span> next to the box.</p>
       <p>If a players tag does not exist already you will see <span class="glyphicon glyphicon-warning-sign alert alert-player alert-warning text-center" aria-hidden="true"></span></p>
       <p>Feel free to change players tags in order to conform to previously uploaded matches and tournaments. Use the search box to the right to find any player already in the database. Don't worry, all matches from this tournament will be linked to the new tag.</p>
-      <p>When changing a players tag SmashMountain will search for the new tag in the database, tags entered here are case sensetive. If it exists the warning will change to a <span class="glyphicon glyphicon-ok alert alert-player alert-success text-center" aria-hidden="true"></span>.</p>
+      <p>When changing a players tag Smash Tracker will search for the new tag in the database, tags entered here are case sensetive. If it exists the warning will change back to a <span class="glyphicon glyphicon-ok alert alert-player alert-success text-center" aria-hidden="true"></span>.</p>
+      <p>You can use the box on the right to search all smashers that are already a part of this community. Entering a blank tag will show all smashers.</p>
       <p><span class="glyphicon glyphicon-alert"></span> Use tab to switch between input fields and check tags.</p>
       <p>Once you are satisfied with the players tags scroll to the bottom and press the Save All button.</p>
   </div>

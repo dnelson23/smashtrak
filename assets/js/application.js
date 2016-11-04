@@ -56,7 +56,7 @@ $(document).ready(function() {
 		$('#login-modal').modal('show');
 	});
 
-	// close alerts after 5 seconds
+	// close dismissible alerts after 5 seconds
 	setTimeout(function() { dismissAlerts(); }, 5000);
 
 	// change accordian caret glyphicons on click
@@ -70,4 +70,45 @@ $(document).ready(function() {
   		caret.addClass('glyphicon-menu-down');
   	}
 	});
+
+	// tournament upload smasher quicksearch
+	$('#search-smashers').change(function() {
+    var tag = $(this).val().toLowerCase();
+    if(tag == "") {
+      $('.smasher').each(function() {
+        if(!$(this).is(":visible"))
+          $(this).slideToggle();
+      })
+    } else {
+      $('.smasher').each(function() {
+      	if($(this).text().toLowerCase().indexOf(tag) != -1 && !$(this).is(":visible")) $(this).slideToggle();
+      	else if($(this).text().toLowerCase().indexOf(tag) == -1 && $(this).is(":visible")) $(this).slideToggle();
+      });
+    }
+	});
+
+	// ajax call to check if a smasher exists in a community
+	$('input.tag-upload').change(function() {
+    var tag = $(this).val(),
+    		community = $('#community_id').val(),
+      	dom = $(this),
+      	status = false;
+
+    $.ajax ({
+      type: 'GET',
+      url: "/smashers/doesExist",
+      dataType: "json",
+      data: { tag: tag, community: community },
+      success: function(data) {
+        var status = dom.parent().parent().find(".tag-status");
+        if(data.exists == true) {
+        	status.removeClass('glyphicon-warning-sign alert-warning');
+        	status.addClass('glyphicon-ok alert-success');
+        } else {
+          status.removeClass('glyphicon-ok alert-success');
+          status.addClass('glyphicon-warning-sign alert-warning');
+        }
+      }
+    });
+  });
 });

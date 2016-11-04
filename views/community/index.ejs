@@ -30,6 +30,14 @@
 			<h1><span class="underline-green community-title"><%= community.name %></span></h1>
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="overview" class="row">
+					<% if(community.description) { %>
+						<div class="col-xs-12 hidden-xs">
+							<h4><%= community.description %></h4>
+						</div>
+						<div class="col-xs-12 visible-xs">
+							<h4><%= community.shortDescription() %><% if(community.shortDescription.length < 30) { %>...<% } %></h4>
+						</div>
+					<% } %>
 					<div class="col-md-6 col-xs-12">
 						<h3>Tournaments: <span class="green"><%= community.tournaments.length %></span></h3>
 					</div>

@@ -77,13 +77,26 @@
       // check to see if this tournament exists, if so redirect to it's view
       Tournament
       .findOne({ url: localData.tUrl })
-      .exec(function(err, tourney) {
+      .then(function(tourney) {
         if(tourney) {
           FlashService.warning(req, 'That tournament has already been uploaded to this community');
           return res.redirect('/c/'+localData.tCommunity+'/tournament/'+tourney.id);
         } else {
-          return res.view('tournament/upload', localData);
+          // else pull smashers already in the community and go to upload view
+          Smasher
+          .find( {community: req.params.commID })
+          .then(function(smashers) {
+            // add smashers tags to localData array
+            localData.allSmashers = smashers.map(function(x) { return x.tag; });
+            return res.view('tournament/upload', localData);
+          })
+          .catch(function(err) {
+            return res.negotiate(err);
+          });
         }
+      })  
+      .catch(function(err) {
+        return res.negotiate(err);
       });
  		});
  	},

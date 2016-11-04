@@ -55,4 +55,7 @@ module.exports.routes = {
   'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
   'post /c/:commID/tournament/create' : 'TournamentController.create',
   'get /c/:commID/tournament/:tID'    : 'TournamentController.show',
+
+  // Smashers Routes
+  'get /smashers/doesExist' : 'SmasherController.doesExist',
 };
