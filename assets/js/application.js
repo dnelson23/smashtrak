@@ -29,7 +29,6 @@ function dismissAlerts() {
 function resize() {
   var heights = window.innerHeight;
   if(heights < 740) $('.scrollable').css('max-height', heights - 246);
-  else $('.scrollable').removeClass('scrollable');
 }
 
 $(document).ready(function() {
