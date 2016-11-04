@@ -56,6 +56,9 @@ module.exports = {
 				.populate('tournaments')
 				.populate('smashers')
 				.then(function(communities) {
+ 					for(var i = 0; i < communities.length; i++) {
+ 						communities[i].tournaments.sort(function(x, y) { return x > y ? -1 : x < y ? 1 : 0; });
+ 					}
 					res.view('dashboard/communities', {communities: communities});
 				})
 			})

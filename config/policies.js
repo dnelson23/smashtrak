@@ -42,7 +42,10 @@ module.exports.policies = {
   },
 
   'CommunityController' : {
-    '*': ['flash', 'isAuthenticated', 'or(hasCommunityRole(\'Member\'), isCommunityPublic)'],
+    'new'     : ['flash', 'isAuthenticated'],
+    'create'  : ['flash', 'isAuthenticated'],
+    'edit'    : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Admin\')'],
+    '*'       : ['flash', 'isAuthenticated', 'or(hasCommunityRole(\'Member\'), isCommunityPublic)'],
   },
 
   'TournamentController' : {

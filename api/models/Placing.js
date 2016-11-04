@@ -6,7 +6,7 @@
  * @description: Model for recording tournament placings for smashers
  */
 
- module.exports = {
+module.exports = {
  	tableName: 'Placings',
 
  	attributes: {
@@ -23,5 +23,5 @@
  		createdBy: { type: 'integer' },
  		updatedBy: { type: 'integer' }
  	}
- }
+}
  

@@ -7,11 +7,11 @@
 module.exports = {
 
 	index: function(req, res) {
-		res.view('home/index');
+		return res.view('home/index');
 	},
 
 	faq: function(req, res) {
-		res.view('home/faq');
+		return res.view('home/faq');
 	}
 };
 

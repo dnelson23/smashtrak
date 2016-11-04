@@ -17,8 +17,7 @@
  		},
  		// isPrivate is stored in the DB as 1 for private and 0 for public
  		isPrivate: {
- 			type: 'int',
- 			required: 'true'
+ 			type: 'int'
  		},
  		description: {
  			type: 'string',

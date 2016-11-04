@@ -9,7 +9,7 @@
 
 module.exports = function(role) {
  	return function(req, res, next) {
- 		var roles = {Admin: 1, Member: 2, SuperUser: 3};
+ 		var roles = {SuperUser: 1, Admin: 2, Member: 3};
 
  		CommunityMember
  			.find({ user: req.user.id, role: roles[role] })

@@ -1,8 +1,14 @@
+<% if(role.type == 'SuperUser') { %>
+	<div class="alert alert-warning"><strong>Careful!</strong> You are editing this community as a Super User. Try not to disrupt the community.</div>
+<% } %>
 <ul class="nav nav-pills community-nav visible-xs">
   <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
   <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
   <li><a data-toggle="pill" href="#smashers">Smashers</a></li>
-  <li><a href="/c/<%= community.id %>/tournament/new" class="btn btn-default btn-sm full outline">Upload Tournament</a></li>
+  <% if(role.type == 'Admin' || role.type == 'SuperUser') { %>
+	  <li><a href="/c/<%= community.id %>/tournament/new" class="btn btn-default btn-sm full outline">Upload Tournament</a></li>
+	  <li><a href="/c/<%= community.id %>/edit" class="btn btn-default btn-sm full">Edit Community</a></li>
+	<% } %>
 </ul>
 <div class="well community-content scrollable">
 	<div class="row">
@@ -11,21 +17,36 @@
 		    <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
 		    <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
 		    <li><a data-toggle="pill" href="#smashers">Smashers</a></li>
-		    <li><a href="/c/<%= community.id %>/tournament/new" class="btn btn-default btn-sm full outline">Upload Tournament</a></li>
+		    <% if(role.type == 'Admin' || role.type == 'SuperUser') { %>
+		    	<li><a href="/c/<%= community.id %>/tournament/new" class="btn btn-default btn-sm full outline">Upload Tournament</a></li>
+		    	<li><a href="/c/<%= community.id %>/edit" class="btn btn-default btn-sm full">Edit Community</a></li>
+		    <% } %>
 		  </ul>
 		</div>
 		<div class="col-xs-12 col-sm-9">
 			<h1><span class="underline-green community-title"><%= community.name %></span></h1>
 			<div class="tab-content">
-				<div class="tab-pane fade in active" id="tournaments" class="col-xs-12">
-					<% for(var i = 0; i < community.tournaments.length; i++) { %>
-						<h3><%= community.tournaments[i].name %></h3>
-					<% } %>
+				<div class="tab-pane fade in active" id="overview" class="row">
+					<div class="col-md-6 col-xs-12">
+						<h3>Tournaments: <span class="green"><%= community.tournaments.length %></span></h3>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<h3>Smashers: <span class="challonge-orange"><%= community.smashers.length %></span></h3>
+					</div>
 				</div>
-				<div class="tab-pane fade" id="smashers" class="col-xs-12">
-					<% for(var i = 0; i < community.smashers.length; i++) { %>
-						<h3><%= community.smashers[i].tag %></h3>
-					<% } %>
+				<div class="tab-pane fade" id="tournaments" class="row">
+					<div class="col-xs-12">
+						<% for(var i = 0; i < community.tournaments.length; i++) { %>
+							<h3><%= community.tournaments[i].name %></h3>
+						<% } %>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="smashers" class="row">
+					<div class="col-xs-12">
+						<% for(var i = 0; i < community.smashers.length; i++) { %>
+							<h3><%= community.smashers[i].tag %></h3>
+						<% } %>
+					</div>
 				</div>
 			</div>
 		</div>

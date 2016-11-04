@@ -48,6 +48,8 @@ module.exports.routes = {
   'get /u/:username/communities'  : 'UserController.communities',
 
   // Community/Tournament Routes
+  'get /c/new'                        : 'CommunityController.new',
+  'post /c/new'                       : 'CommunityController.create',
   'get /c/:commID'                    : 'CommunityController.find',
   'get /c/:commID/tournament/new'     : 'TournamentController.new',
   'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
