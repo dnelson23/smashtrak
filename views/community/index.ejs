@@ -35,7 +35,10 @@
 							<h4><%= community.description %></h4>
 						</div>
 						<div class="col-xs-12 visible-xs">
-							<h4><%= community.shortDescription() %><% if(community.shortDescription.length < 30) { %>...<% } %></h4>
+							<h4>
+								<% if(community.description.length > 30) { %><%= community.description.substring(0, 30) %>
+								<% } else { %><%= community.description %>...<% } %>
+							</h4>
 						</div>
 					<% } %>
 					<div class="col-md-6 col-xs-12">
@@ -47,16 +50,44 @@
 				</div>
 				<div class="tab-pane fade" id="tournaments" class="row">
 					<div class="col-xs-12">
-						<% for(var i = 0; i < community.tournaments.length; i++) { %>
-							<h3><%= community.tournaments[i].name %></h3>
-						<% } %>
+						<table class="table table-striped">
+							<thead>
+								<td><span class="green-underline">Tournament</span></td>
+								<td><span class="green-underline">Participants</span></td>
+								<td><span class="green-underline">Date</span></td>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < community.tournaments.length; i++) { %>
+									<tr>
+										<td>
+											<a href="/c/<%= community.id %>/tournament/<%= community.tournaments[i].id %>"><%= community.tournaments[i].name %></a>
+										</td>
+										<td><%= community.tournaments[i].entrants.length %></td>
+										<td><%= community.tournaments[i].date.toDateString() %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="smashers" class="row">
 					<div class="col-xs-12">
-						<% for(var i = 0; i < community.smashers.length; i++) { %>
-							<h3><%= community.smashers[i].tag %></h3>
-						<% } %>
+						<table class="table table-striped">
+							<thead>
+								<td><span class="green-underline">Tag</span></td>
+								<td><span class="green-underline">Wins</span></td>
+								<td><span class="green-underline">Losses</span></td>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < community.smashers.length; i++) { %>
+									<tr>
+										<td><%= community.smashers[i].tag %></a></td>
+										<td><span class="green"><%= community.smashers[i].wins.length %></span></td>
+										<td><span class="challonge-orange"><%= community.smashers[i].losses.length %></span></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

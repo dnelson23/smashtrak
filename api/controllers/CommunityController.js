@@ -14,11 +14,41 @@
  		.populate('tournaments')
  		.populate('smashers')
  		.then(function(community) {
- 			if(community != null) {
- 				return res.view('community/index', { community: community, role: res.locals.role })
- 			} else {
- 				return res.notFound(undefined, {description: 'Could not find that community.'});
- 			}
+ 			if(community) {
+ 				community = community.toObject(); // this lets us replace associations once we manually find and populate them
+ 				// we only need the number of entrants for each tournaments but we have to retrieve them manually
+ 				async.map(community.tournaments, function(tournament, mapCb) {
+ 					Tournament
+ 					.findOne(tournament.id)
+ 					.populate('entrants')
+ 					.exec(function(err, t) {
+ 						if(err) return mapCb(err);
+ 						return mapCb(null, t);
+ 					});
+ 				}, function(err, tournaments) {
+ 					if(err) return res.negotiate(err);
+
+ 					community.tournaments = tournaments;
+ 					// now find our smashers
+	 				async.map(community.smashers, function(smasher, mapCb) {
+		 				Smasher
+		 				.findOne(smasher.id)
+		 				.populate('wins')
+		 				.populate('losses')
+		 				.exec(function(err, s) {
+		 					if(err) return mapCb(err);
+		 					return mapCb(null, s);
+		 				});
+		 			}, function(err, smashers) {
+		 				if(err) return res.negotiate(err);
+		 				
+		 				community.smashers = smashers;
+		 				return res.view('community/index', { community: community, role: res.locals.role });
+		 			});
+ 				});
+	 		} else {
+	 			return res.notFound(undefined, { description: 'Could not find that community.' });
+	 		}
  		})
 		.catch(function(err) {
 			res.negotiate(err);
