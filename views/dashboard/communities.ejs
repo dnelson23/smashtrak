@@ -1,28 +1,28 @@
 <div class="communities-content">
 	<a href="/c/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create New Community</a>
 	<% if(communities) { %>
-			<% for(var i = 0; i < communities.length; i++) { %>
-			  <div class="panel panel-default">
-			    <div class="panel-heading text-center collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-controls="collapse<%= i %>" aria-expanded="false" role="tab" id="heading<%= i %>">
-			      <h4 class="panel-title"><%= communities[i].name %> <span class="glyphicon glyphicon-menu-down"></span></h4>
-			    </div>
-			    <div id="collapse<%= i %>" class="panel-collapse collapsed in" role="tabpanel" aria-labelledby="heading<%= i %>" aria-expanded="false">
-			      <div class="panel-body">
-			      	<% if(communities[i].tournaments.length > 0) { %>
-				        <p>Tournaments: <span class="challonge-orange"><%= communities[i].tournaments.length %></span></p>
-				        <p>Last tournament uploaded on: <%= communities[i].tournaments[communities[i].tournaments.length - 1].createdAt.toDateString() %></p>
-			        <% } else { %>
-			        	<p>No tournaments tracked, <a href="/c/<%= communities[i].id %>/tournament/new">Upload one now!</a></p>
-			        <% } %>
-			        <% if(communities[i].smashers.length > 0) { %>
-				        <p>Smashers Tracked: <span class="green"><%= communities[i].smashers.length %></span></p>
-				      <% } else { %>
-				      	<p>There are no smashers in this community, upload a tournament to begin tracking progress!</p>
-				      <% } %> 
-			        <a href="/c/<%= communities[i].id %>" class="btn btn-primary full outline">View Community</a>
-			      </div>
-			    </div>
-			  </div>
-			<% } %>
+		<% for(var i = 0; i < communities.length; i++) { %>
+		  <div class="panel panel-default">
+		    <div class="panel-heading text-center collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-controls="collapse<%= i %>" aria-expanded="false" role="tab" id="heading<%= i %>">
+		      <h4 class="panel-title"><%= communities[i].name %> <span class="glyphicon glyphicon-menu-down"></span></h4>
+		    </div>
+		    <div id="collapse<%= i %>" class="panel-collapse collapsed in" role="tabpanel" aria-labelledby="heading<%= i %>" aria-expanded="false">
+		      <div class="panel-body">
+		      	<% if(communities[i].tournaments.length > 0) { %>
+			        <p>Tournaments: <span class="challonge-orange"><%= communities[i].tournaments.length %></span></p>
+			        <p>Last tournament uploaded on: <%= communities[i].tournaments[communities[i].tournaments.length - 1].createdAt.toDateString() %></p>
+		        <% } else { %>
+		        	<p>No tournaments tracked, <a href="/c/<%= communities[i].id %>/tournament/new">Upload one now!</a></p>
+		        <% } %>
+		        <% if(communities[i].smashers.length > 0) { %>
+			        <p>Smashers Tracked: <span class="green"><%= communities[i].smashers.length %></span></p>
+			      <% } else { %>
+			      	<p>There are no smashers in this community, upload a tournament to begin tracking progress!</p>
+			      <% } %> 
+		        <a href="/c/<%= communities[i].id %>" class="btn btn-primary full outline">View Community</a>
+		      </div>
+		    </div>
+		  </div>
+		<% } %>
 	<% } %>
 </div>

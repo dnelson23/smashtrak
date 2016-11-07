@@ -8,7 +8,7 @@
 
  module.exports = {
 
-  show: function(req, res) {
+  find: function(req, res) {
     Tournament
     .findOne(req.params.tID)
     .populate('community')

@@ -2,8 +2,6 @@
  * Route Mappings
  * (sails.config.routes)
  *
- * Your routes map URLs to views and controllers.
- *
  * If Sails receives a URL that doesn't match any of the routes below,
  * it will check for matching files (images, scripts, stylesheets, etc.)
  * in your assets directory.  e.g. `http://localhost:1337/images/foo.jpg`
@@ -15,47 +13,36 @@
  * Note: Sails doesn't ACTUALLY serve stuff from `assets`-- the default Gruntfile in Sails copies
  * flat files from `assets` to `.tmp/public`.  This allows you to do things like compile LESS or
  * CoffeeScript for the front-end.
- *
- * For more information on configuring custom routes, check out:
- * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
-
+  // Home Routes
   '/'         : 'HomeController.index',
   '/faq'      : 'HomeController.faq',
 
+  // Auth Routes
   'post /login': 'AuthController.login',
-
   'post /logout': 'AuthController.logout',
 
-  'post /register' : 'UserController.create',
-
   // User account Routes
+  'post /register'                : 'UserController.create',
   'get /u/:username'              : 'UserController.edit',
   'post /u/:username'             : 'UserController.update',
   'get /u/:username/dashboard'    : 'UserController.dashboard',
   'get /u/:username/communities'  : 'UserController.communities',
 
-  // Community/Tournament Routes
-  'get /c/new'                        : 'CommunityController.new',
-  'post /c/new'                       : 'CommunityController.create',
-  'get /c/:commID'                    : 'CommunityController.find',
+  // Community Routes
+  'get /c/new'      : 'CommunityController.new',
+  'post /c/new'     : 'CommunityController.create',
+  'get /c/:commID'  : 'CommunityController.find',
+
+  // Tournament Routes
   'get /c/:commID/tournament/new'     : 'TournamentController.new',
   'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
   'post /c/:commID/tournament/create' : 'TournamentController.create',
-  'get /c/:commID/tournament/:tID'    : 'TournamentController.show',
+  'get /c/:commID/tournament/:tID'    : 'TournamentController.find',
 
   // Smashers Routes
-  'get /smashers/doesExist' : 'SmasherController.doesExist',
+  'get /smashers/doesExist'           : 'SmasherController.doesExist',
 };
