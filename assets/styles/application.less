@@ -33,7 +33,7 @@ body {
 }
 
 ul {
-    &.community-nav {
+    &.nav-xs {
         white-space: nowrap;
         overflow-x: auto;
 
@@ -44,8 +44,15 @@ ul {
     }
 }
 
-thead {
-    font-size: 20px;
+table {
+    a {
+        color: @text-primary;
+    }
+
+    thead {
+        font-size: 18px;
+        color: @light-gray;
+    }
 }
 
 .fill {
@@ -58,7 +65,7 @@ thead {
     height: 10%;
     max-height: 10%;
     line-height: 60px;
-    color: @light-gray;
+    color: @gray;
     img {
         max-height: 40px;
         display: inline-block;
@@ -73,7 +80,7 @@ thead {
     white-space: nowrap;
 }
 
-.community-content {
+.community-content, .smasher-content {
     overflow-x: hidden;
     min-height: 270px;
 }

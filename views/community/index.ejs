@@ -4,7 +4,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	</div>
 <% } %>
-<ul class="nav nav-pills community-nav visible-xs">
+<ul class="nav nav-pills nav-xs visible-xs">
   <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
   <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
   <li><a data-toggle="pill" href="#smashers">Smashers</a></li>
@@ -27,9 +27,9 @@
 		  </ul>
 		</div>
 		<div class="col-xs-12 col-sm-9">
-			<h1><span class="underline-green community-title"><%= community.name %></span></h1>
+			<h2><span class="underline-green community-title"><%= community.name %></span></h2>
 			<div class="tab-content">
-				<div class="tab-pane fade in active" id="overview" class="row">
+				<div class="tab-pane fade in active row" id="overview">
 					<% if(community.description) { %>
 						<div class="col-xs-12 hidden-xs">
 							<h4><%= community.description %></h4>
@@ -48,13 +48,13 @@
 						<h3>Smashers: <span class="challonge-orange"><%= community.smashers.length %></span></h3>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="tournaments" class="row">
+				<div class="tab-pane fade row" id="tournaments">
 					<div class="col-xs-12">
 						<table class="table table-striped">
 							<thead>
-								<td><span class="green-underline">Tournament</span></td>
-								<td><span class="green-underline">Participants</span></td>
-								<td><span class="green-underline">Date</span></td>
+								<td>Tournament</td>
+								<td>Participants</td>
+								<td>Date</td>
 							</thead>
 							<tbody>
 								<% for(var i = 0; i < community.tournaments.length; i++) { %>
@@ -70,18 +70,20 @@
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="smashers" class="row">
+				<div class="tab-pane fade row" id="smashers">
 					<div class="col-xs-12">
 						<table class="table table-striped">
 							<thead>
-								<td><span class="green-underline">Tag</span></td>
-								<td><span class="green-underline">Wins</span></td>
-								<td><span class="green-underline">Losses</span></td>
+								<td>Tag</td>
+								<td>Wins</td>
+								<td>Losses</td>
 							</thead>
 							<tbody>
 								<% for(var i = 0; i < community.smashers.length; i++) { %>
 									<tr>
-										<td><%= community.smashers[i].tag %></a></td>
+										<td>
+											<a href="/c/<%= community.id %>/smasher/<%= community.smashers[i].tag %>"><%= community.smashers[i].tag %></a>
+										</td>
 										<td><span class="green"><%= community.smashers[i].wins.length %></span></td>
 										<td><span class="challonge-orange"><%= community.smashers[i].losses.length %></span></td>
 									</tr>

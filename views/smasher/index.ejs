@@ -1,0 +1,127 @@
+<ul class="nav nav-pills nav-xs visible-xs">
+  <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
+  <li><a data-toggle="pill" href="#wins">Wins</a></li>
+  <li><a data-toggle="pill" href="#losses">Losses</a></li>
+  <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
+  <% if(role.type == 'Admin' || role.type == 'SuperUser') { %>
+	  <li><a href="/c/<%= community.id %>/smasher/<%= smasher.tag %>/edit" class="btn btn-default btn-sm full">Edit Smasher</a></li>
+	<% } %>
+</ul>
+<div class="well smasher-content scrollable">
+	<div class="row">
+		<div class="col-xs-12">
+			<ol class="breadcrumb">
+			  <li><a href="/u/<%= req.user.id %>/dashboard">Dashboard</a></li>
+			  <li><a href="/c/<%= community.id %>"><%= community.name %></a></li>
+			  <li class="active"><%= smasher.tag %></li>
+			</ol>
+		</div>
+		<div class="col-xs-3 hidden-xs">
+			<ul class="nav nav-pills nav-stacked affix">
+			  <li class="active"><a data-toggle="pill" href="#overview">Overview</a></li>
+			  <li><a data-toggle="pill" href="#wins">Wins</a></li>
+			  <li><a data-toggle="pill" href="#losses">Losses</a></li>
+			  <li><a data-toggle="pill" href="#tournaments">Tournaments</a></li>
+			  <% if(role.type == 'Admin' || role.type == 'SuperUser') { %>
+				  <li><a href="/c/<%= community.id %>/smasher/<%= smasher.tag %>/edit" class="btn btn-default btn-sm full">Edit Smasher</a></li>
+				<% } %>
+			</ul>
+		</div>
+		<div class="col-xs-12 col-sm-9">
+			<h1 class="underline-green"><%= smasher.tag %></h2>
+			<div class="tab-content">
+				<div class="tab-pane fade in active row" id="overview">
+					<div class="col-xs-6">
+						<h4>Career Wins: <span class="green"><%= smasher.wins.length %></span></h4>
+					</div>
+					<div class="col-xs-6">
+						<h4>Career Losses: <span class="challonge-orange"><%= smasher.losses.length %></span></h4>
+					</div>
+					<div class="col-xs-12">
+						<h3 class="underline-green">Tournament Placings</h3>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Tournament</td>
+									<td>Place</td>
+									<td>Date</td>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < smasher.placings.length; i++) { %>
+									<tr>
+										<td><%= smasher.placings[i].tournament.name %></td>
+										<td><%= smasher.placings[i].place %></td>
+										<td><%= smasher.placings[i].tournament.date.toDateString() %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade row" id="wins">
+					<div class="col-xs-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Opponent</td>
+									<td>Tournament</td>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < smasher.wins.length; i++) { %>
+									<tr>
+										<td><%= smasher.wins[i].loser.tag %></td>
+										<td><%= smasher.wins[i].tournament.name %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade row" id="losses">
+					<div class="col-xs-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Opponent</td>
+									<td>Tournament</td>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < smasher.losses.length; i++) { %>
+									<tr>
+										<td><%= smasher.losses[i].winner.tag %></td>
+										<td><%= smasher.losses[i].tournament.name %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade row" id="tournaments">
+					<div class="col-xs-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Tournament Name</td>
+									<td>Place</td>
+									<td>Date</td>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < smasher.placings.length; i++) { %>
+									<tr>
+										<td><%= smasher.placings[i].tournament.name %></td>
+										<td><%= smasher.placings[i].place %></td>
+										<td><%= smasher.placings[i].tournament.date.toDateString() %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

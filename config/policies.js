@@ -50,7 +50,12 @@ module.exports.policies = {
 
   'TournamentController' : {
     '*'     : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Admin\')'],
-    'show'  : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Member\')'],
+    'find'  : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Member\')'],
+  },
+
+  'SmasherController' : {
+    '*'     : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Admin\')'],
+    'find'  : ['flash', 'isAuthenticated', 'hasCommunityRole(\'Member\')'],
   }
 
   /***************************************************************************

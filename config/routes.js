@@ -33,9 +33,10 @@ module.exports.routes = {
   'get /u/:username/communities'  : 'UserController.communities',
 
   // Community Routes
-  'get /c/new'      : 'CommunityController.new',
-  'post /c/new'     : 'CommunityController.create',
-  'get /c/:commID'  : 'CommunityController.find',
+  'get /c/new'          : 'CommunityController.new',
+  'post /c/new'         : 'CommunityController.create',
+  'get /c/:commID'      : 'CommunityController.find',
+  'get /c/:commID/edit' : 'CommunityController.edit',
 
   // Tournament Routes
   'get /c/:commID/tournament/new'     : 'TournamentController.new',
@@ -44,5 +45,6 @@ module.exports.routes = {
   'get /c/:commID/tournament/:tID'    : 'TournamentController.find',
 
   // Smashers Routes
+  'get /c/:commID/smasher/:sTag'      : 'SmasherController.find',
   'get /smashers/doesExist'           : 'SmasherController.doesExist',
 };

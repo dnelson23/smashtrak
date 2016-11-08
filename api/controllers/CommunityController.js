@@ -28,7 +28,7 @@
  				}, function(err, tournaments) {
  					if(err) return res.negotiate(err);
 
- 					community.tournaments = tournaments;
+ 					community.tournaments = tournaments ? tournaments : [];
  					// now find our smashers
 	 				async.map(community.smashers, function(smasher, mapCb) {
 		 				Smasher
@@ -42,7 +42,7 @@
 		 			}, function(err, smashers) {
 		 				if(err) return res.negotiate(err);
 		 				
-		 				community.smashers = smashers;
+		 				community.smashers = smashers ? smashers : [];
 		 				return res.view('community/index', { community: community, role: res.locals.role });
 		 			});
  				});
@@ -94,6 +94,6 @@
  	},
 
  	edit: function(req, res) {
-
+ 		return res.underConstruction(['Testing']);
  	}
 }
