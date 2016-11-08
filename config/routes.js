@@ -37,6 +37,7 @@ module.exports.routes = {
   'post /c/new'               : 'CommunityController.create',
   'get /c/:commID'            : 'CommunityController.find',
   'get /c/:commID/edit'       : 'CommunityController.edit',
+  'post /c/:commID/edit'      : 'CommunityController.update',
   'post /c/:commID/addMember' : 'CommunityController.addMember',
 
   // Tournament Routes

@@ -111,6 +111,28 @@
  		});
  	},
 
+ 	update: function(req, res) {
+ 		Community
+ 		.findOne(req.params.commID)
+ 		.exec(function(err, c) {
+ 			if(err) return res.negotiate(err);
+
+ 			if(c) {
+ 				c.name = req.param('name');
+ 				c.description = req.param('description');
+ 				c.updatedBy = req.user.id;
+ 				c.save(function(err) {
+ 					if(err) return res.negotiate(err);
+
+ 					FlashService.success(req, 'Community updated successfully.');
+ 					return res.redirect('/c/' + c.id + '/edit');
+ 				});
+ 			} else {
+ 				return res.notFound();
+ 			}
+ 		})
+ 	},
+
  	addMember: function(req, res) {
  		User
  		.findOne({or: [{ username: req.param('user') }, { email: req.param('user') }]})
