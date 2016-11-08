@@ -1,0 +1,9 @@
+<div class="text-center">
+	<h1>This page is under construction</h1>
+	<h4>Keep checking back for updates, thank you for your patience.</h4>
+</div>
+<% if(data && data.length > 0) { %>
+	<% for(var i = 0; i < data.length; i++) { %>
+		<div class="alert alert-info"><%= data[i] %></div>
+	<% } %>
+<% } %>
