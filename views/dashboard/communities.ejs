@@ -8,6 +8,9 @@
 		    </div>
 		    <div id="collapse<%= i %>" class="panel-collapse collapsed in" role="tabpanel" aria-labelledby="heading<%= i %>" aria-expanded="false">
 		      <div class="panel-body">
+		      	<% if(communities[i].description) { %>
+		      		<p><%= communities[i].description %></p>
+		      	<% } %>
 		      	<% if(communities[i].tournaments.length > 0) { %>
 			        <p>Tournaments: <span class="challonge-orange"><%= communities[i].tournaments.length %></span></p>
 			        <p>Last tournament uploaded on: <%= communities[i].tournaments[communities[i].tournaments.length - 1].createdAt.toDateString() %></p>
