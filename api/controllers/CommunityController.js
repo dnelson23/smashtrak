@@ -94,6 +94,39 @@
  	},
 
  	edit: function(req, res) {
- 		return res.underConstruction(['Testing']);
- 	}
+ 		Community
+ 		.findOne(req.params.commID)
+ 		.exec(function(err, c) {
+ 			if(err) return res.negotiate(err);
+
+ 			if(c) {
+	 			MemberRole
+	 			.find()
+	 			.exec(function(err, roles) {
+	 				if(err) return res.negotiate(err);
+
+	 				return res.view('community/edit', { community: c, roles: roles.splice(1) });
+	 			});
+	 		} else return res.notFound(undefined, 'Could not find that community');
+ 		});
+ 	},
+
+ 	addMember: function(req, res) {
+ 		User
+ 		.findOne({or: [{ username: req.param('user') }, { email: req.param('user') }]})
+ 		.then(function(u) {
+ 			if(!u) return res.json({ err: true, message: 'Could not find user ' + req.param('user') + '.' });
+
+ 			var cBy = uBy = req.user.id;
+ 			CommunityMember
+ 			.create({ community: req.param('community'), user: u.id, role: req.param('role'), createdBy: cBy, updatedBy: uBy })
+ 			.exec(function(err, cMember) {
+ 				if(err || !cMember) return res.json({ err: true, message: 'Something went wrong while adding the user.' });
+ 				else return res.json({ success: true });
+ 			});
+ 		})
+ 		.catch(function(err) {
+ 			return res.json({ err: true, message: 'Something went wrong while adding the user.' });
+ 		})
+ 	},
 }

@@ -23,7 +23,7 @@ function isNullorWhitespace(string) {
 }
 
 function dismissAlerts() {
-	$('.alert-dismissible').alert('close');
+	setTimeout(function() { $('.alert-dismissible').alert('close'); }, 5000);
 }
 
 function resize() {
@@ -57,7 +57,7 @@ $(document).ready(function() {
 	});
 
 	// close dismissible alerts after 5 seconds
-	setTimeout(function() { dismissAlerts(); }, 5000);
+	dismissAlerts();
 
 	// change accordian caret glyphicons on click
 	$('.panel-heading').click(function(event) {
@@ -111,4 +111,40 @@ $(document).ready(function() {
       }
     });
   });
+
+  // add community member ajax call
+  $('#add-member-send').click(function() {
+  	var user = $('#add-member-user').val(),
+  			community = $('#community-id').val(),
+  			role = $('#add-member-role').val(),
+  			csrf = $('input[name="_csrf"]').val(),
+  			error = false,
+  			element;
+
+  	if(isNullorWhitespace(user)) { $('#user-field').addClass('has-error'); error = true; }
+  	else $('#role-field').removeClass('has-error');
+
+  	if(isNullorWhitespace(role)) { $('#role-field').addClass('has-error'); error = true; }
+  	else { $('#role-field').removeClass('has-error'); }
+
+  	if(error) return;
+
+  	$.ajax ({
+  		type: 'POST',
+  		url: "/c/" + community + "/addMember",
+  		dataType: "json",
+  		data: { user: user, community: community, _csrf: csrf, role: role },
+  		success: function(data) {
+  			console.log(data);
+  			if(data.err) {
+  				element = '<div class="alert alert-dismissible alert-error fade in member-alert><strong>Error: </strong>' + data.message + '</div>';
+  				$('#member-alert').append(element);
+  			} else if(data.success) {
+  				element = '<div class="alert alert-dismissible alert-success fade in member-alert">Request has been sent to ' + user + '</div>';
+  				$('#member-alert').append(element);
+  			}
+  			dismissAlerts();
+  		}
+  	});
+  })
 });

@@ -33,10 +33,11 @@ module.exports.routes = {
   'get /u/:username/communities'  : 'UserController.communities',
 
   // Community Routes
-  'get /c/new'          : 'CommunityController.new',
-  'post /c/new'         : 'CommunityController.create',
-  'get /c/:commID'      : 'CommunityController.find',
-  'get /c/:commID/edit' : 'CommunityController.edit',
+  'get /c/new'                : 'CommunityController.new',
+  'post /c/new'               : 'CommunityController.create',
+  'get /c/:commID'            : 'CommunityController.find',
+  'get /c/:commID/edit'       : 'CommunityController.edit',
+  'post /c/:commID/addMember' : 'CommunityController.addMember',
 
   // Tournament Routes
   'get /c/:commID/tournament/new'     : 'TournamentController.new',

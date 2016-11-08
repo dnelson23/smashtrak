@@ -1,0 +1,41 @@
+<div id="member-alert-container"></div>
+<h1>Edit Community</h1>
+<div class="row">
+	<div class="col-xs-12">
+		<form method="POST" action="/c/<%= community.id %>/edit">
+			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+			<div class="form-group">
+				<label for="name">Community Name</label>
+				<input type="text" class="form-control" name="name" value="<%= community.name %>"/>
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea class="form-control" rows="4"><% if(community.description) { %><%= community.description %><% } %></textarea>
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary outline">Update Community</button>
+		</form>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Add a User to this Community</h4>
+				<div class="form-horizontal form-group">
+					<input type="hidden" id="community-id" value="<%= community.id %>" />
+					<label for="add-member" class="col-xs-12 col-sm-3 control-label">Enter username or e-mail</label>
+					<div class="col-xs-12 col-sm-3" id="user-field">
+						<input type="text" class="form-control" id="add-member-user" name="add-member-user" placeholder="Username/E-Mail" />
+					</div>
+					<label for="add-member-role" class="col-xs-12 col-sm-2 control-label">User Level</label>
+					<div class="col-xs-12 col-sm-2" id="role-field">
+						<select class="form-control" id="add-member-role" name="add-member-role">
+							<option value="" disabled selected>Select Role</option>
+							<% for(var i = 0; i < roles.length; i++) { %>
+								<option value="<%= roles[i].id %>"><%= roles[i].type %></option>
+							<% } %>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<button class="btn btn-lg btn-primary" id="add-member-send">Send Request</button>
+			</div>
+		</div>
+	</div>
+</div>
