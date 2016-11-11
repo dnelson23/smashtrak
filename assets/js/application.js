@@ -23,7 +23,7 @@ function isNullorWhitespace(string) {
 }
 
 function dismissAlerts() {
-	setTimeout(function() { $('.alert-dismissible').alert('close'); }, 5000);
+	if($('.alert-dismissible').length > 0) setTimeout(function() { $('.alert-dismissible').alert('close'); }, 5000);
 }
 
 function resize() {
@@ -135,13 +135,12 @@ $(document).ready(function() {
   		dataType: "json",
   		data: { user: user, community: community, _csrf: csrf, role: role },
   		success: function(data) {
-  			console.log(data);
   			if(data.err) {
-  				element = '<div class="alert alert-dismissible alert-error fade in member-alert><strong>Error: </strong>' + data.message + '</div>';
-  				$('#member-alert').append(element);
+  				element = '<div class="alert alert-dismissible alert-danger fade in member-alert"><strong>Error: </strong>' + data.message + '</div>';
+  				$('#member-alert-container').append(element);
   			} else if(data.success) {
   				element = '<div class="alert alert-dismissible alert-success fade in member-alert">Request has been sent to ' + user + '</div>';
-  				$('#member-alert').append(element);
+  				$('#member-alert-container').append(element);
   			}
   			dismissAlerts();
   		}

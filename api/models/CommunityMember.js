@@ -20,6 +20,10 @@ module.exports = {
  		role: {
  			model: 'memberrole'
  		},
+ 		status: {
+ 			type: 'string',
+ 			enum: ['pending', 'accepted']
+ 		},
  		createdBy: { type: 'integer' },
  		updatedBy: { type: 'integer' }
  	}

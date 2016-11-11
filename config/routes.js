@@ -31,6 +31,7 @@ module.exports.routes = {
   'post /u/:username'             : 'UserController.update',
   'get /u/:username/dashboard'    : 'UserController.dashboard',
   'get /u/:username/communities'  : 'UserController.communities',
+  'get /u/checkUser'              : 'UserController.checkUser',
 
   // Community Routes
   'get /c/new'                : 'CommunityController.new',
@@ -38,7 +39,8 @@ module.exports.routes = {
   'get /c/:commID'            : 'CommunityController.find',
   'get /c/:commID/edit'       : 'CommunityController.edit',
   'post /c/:commID/edit'      : 'CommunityController.update',
-  'post /c/:commID/addMember' : 'CommunityController.addMember',
+  'post /c/:commID/delete'    : 'CommunityController.delete',
+  'post /c/:commID/addMember' : 'CommunityController.requestMember',
 
   // Tournament Routes
   'get /c/:commID/tournament/new'     : 'TournamentController.new',

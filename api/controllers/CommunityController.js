@@ -8,6 +8,7 @@
 
  module.exports = {
 
+ 	// GET '/c/:commID'
  	find: function(req, res) {
  		Community
  		.findOne(req.params.commID)
@@ -55,10 +56,15 @@
 		});
  	},
 
+ 	// GET '/c/new'
  	new: function(req, res) {
  		return res.view('community/new');
  	},
 
+ 	/* POST '/c/new'
+ 	 * @param {String} name
+ 	 * @param {String} description
+ 	 */
  	create: function(req, res) {
  		var commParams = {
  			name: req.param('name'),
@@ -93,6 +99,7 @@
  		});
  	},
 
+ 	// GET '/c/:commID/edit'
  	edit: function(req, res) {
  		Community
  		.findOne(req.params.commID)
@@ -111,6 +118,11 @@
  		});
  	},
 
+ 	/* POST '/c/:commID/edit'
+ 	 *
+ 	 * @param {String} name
+ 	 * @param {String} description
+ 	 */
  	update: function(req, res) {
  		Community
  		.findOne(req.params.commID)
@@ -133,22 +145,34 @@
  		})
  	},
 
- 	addMember: function(req, res) {
- 		User
- 		.findOne({or: [{ username: req.param('user') }, { email: req.param('user') }]})
- 		.then(function(u) {
- 			if(!u) return res.json({ err: true, message: 'Could not find user ' + req.param('user') + '.' });
+ 	// DELETE '/c/:commID/edit'
+ 	delete: function(req, res) {
+ 		Community
+ 		.destroy(req.params.commID)
+ 		.exec(function(err) {
+ 			if(err) return res.negotiate(err);
+ 			FlashService.success(req, 'Community has been deleted successfully');
+ 			return res.redirect('/u/' + req.user.username + '/dashboard');
+ 		});
+ 	},
 
- 			var cBy = uBy = req.user.id;
- 			CommunityMember
- 			.create({ community: req.param('community'), user: u.id, role: req.param('role'), createdBy: cBy, updatedBy: uBy })
- 			.exec(function(err, cMember) {
- 				if(err || !cMember) return res.json({ err: true, message: 'Something went wrong while adding the user.' });
- 				else return res.json({ success: true });
- 			});
- 		})
- 		.catch(function(err) {
- 			return res.json({ err: true, message: 'Something went wrong while adding the user.' });
- 		})
+ 	// Ajax call that attempts to send a member request to a user
+ 	requestMember: function(req, res) {
+ 		UserService.doesExist(req.param('user'), function(err, doesExist, user) {
+ 			if(err) return res.json({ err: true, message: err.message });
+ 			else if(!doesExist) return res.json({ err: true, message: 'User ' + req.param('user') + ' does not exist.' });
+ 			else {
+ 				var cBy = uBy = req.user.id;
+	 			CommunityMember
+	 			.findOrCreate({ community: req.param('community'), user: user.id, role: req.param('role') },
+	 										{ community: req.param('community'), user: user.id, role: req.param('role'), createdBy: cBy, updatedBy: uBy })
+	 			.exec(function(err, cMember) {
+	 				if(err) return res.json({ err: true, message: 'Something went wrong while adding the user.' });
+	 				else if(cMember.createdAt.toString() != new Date().toString())
+	 					return res.json({ err: true, message: 'That user is already a member of the community with that role.' });
+	 				else return res.json({ success: true, message: 'Request sent to ' + req.param('user') + '.' });
+	 			});
+ 			}
+ 		});
  	},
 }
