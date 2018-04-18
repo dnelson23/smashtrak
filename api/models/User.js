@@ -9,7 +9,7 @@
 var bcrypt = require('bcrypt');
 
 module.exports = {
-	tableName: 'Users',
+	tableName: 'User',
 
     attributes: {
         email: {

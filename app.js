@@ -56,8 +56,7 @@ process.chdir(__dirname);
   // Attempt to 
   var dotenv;
   try {
-    dotenv = require('dotenv');
-    dotenv.load();
+    dotenv = require('dotenv').config();
   } catch(e) {
     console.log('The "dotenv" module does not seem to be laoded.');
     return;

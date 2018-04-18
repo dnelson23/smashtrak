@@ -1,5 +1,5 @@
 {
-  "name": "Smash Tracker",
+  "name": "smash_tracker",
   "private": true,
   "version": "0.0.0",
   "description": "A regional tracking application for Super Smash Brothers communities.",
@@ -7,7 +7,7 @@
   "dependencies": {
     "bcrypt": "~0.8.0",
     "dotenv": "^2.0.0",
-    "ejs": "2.3.4",
+    "ejs": "2.5.5",
     "grunt": "1.0.1",
     "grunt-bowercopy": "^1.2.4",
     "grunt-contrib-clean": "1.0.0",
@@ -38,9 +38,9 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dnelson24/smashtrack.git"
+    "url": "git://github.com/dnelson23/smashtrak.git"
   },
-  "author": "dnelson24",
+  "author": "dnelson23",
   "license": "MIT",
   "devDependencies": {}
 }
