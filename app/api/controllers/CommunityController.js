@@ -81,6 +81,7 @@
  				community: comm.id,
  				user: req.user.id,
  				role: 2,
+ 				status: 'pending',
  				createdBy: req.user.id,
  				updatedBy: req.user.id
  			};
