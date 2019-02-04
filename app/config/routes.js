@@ -29,7 +29,7 @@ module.exports.routes = {
   'post /register'                : 'UserController.create',
   'get /u/:username'              : 'UserController.edit',
   'post /u/:username'             : 'UserController.update',
-  'get /u/:username/dashboard'    : 'UserController.dashboard',
+  'get /u/:username/dashboard'    : 'UserController.communities',
   'get /u/:username/communities'  : 'UserController.communities',
   'get /u/checkUser'              : 'UserController.checkUser',
 
@@ -43,10 +43,11 @@ module.exports.routes = {
   'post /c/:commID/addMember' : 'CommunityController.requestMember',
 
   // Tournament Routes
-  'get /c/:commID/tournament/new'     : 'TournamentController.new',
-  'post /c/:commID/tournament/new'    : 'TournamentController.pullTournament',
-  'post /c/:commID/tournament/create' : 'TournamentController.create',
-  'get /c/:commID/tournament/:tID'    : 'TournamentController.find',
+  'get /c/:commID/tournament/new'		: 'TournamentController.new',
+  'post /c/:commID/tournament/new'		: 'TournamentController.pullTournament',
+  'post /c/:commID/tournament/create'		: 'TournamentController.create',
+  'get /c/:commID/tournament/:tID'		: 'TournamentController.find',
+  'post /c/:commID/tournament/:tID/delete'	: 'TournamentController.delete',
 
   // Smashers Routes
   'get /c/:commID/smasher/:sTag'      : 'SmasherController.find',

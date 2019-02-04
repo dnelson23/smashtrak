@@ -16,6 +16,14 @@ a {
     &:hover { color: @light-green; }
     &:active { color: @light-green; }
     &:focus { color: @light-green; }
+    &.tournament-delete {
+        background: transparent;
+        border: none;
+        &:hover {
+            color: @red;
+            cursor: pointer;
+        }
+    }
 }
 
 section {

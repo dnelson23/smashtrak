@@ -66,10 +66,16 @@
 								<% for(var i = 0; i < community.tournaments.length; i++) { %>
 									<tr>
 										<td>
-											<a href="/c/<%= community.id %>/tournament/<%= community.tournaments[i].id %>"><%= community.tournaments[i].name %></a>
+											<a href="<%= community.tournaments[i].url %>" target="_blank"><%= community.tournaments[i].name %> <span class="glyphicon glyphicon-new-window"></span></a>
 										</td>
 										<td><%= community.tournaments[i].entrants.length %></td>
 										<td><%= community.tournaments[i].date.toDateString() %></td>
+										<td>
+											<form method="post" action="/c/<%= community.id %>/tournament/<%= community.tournaments[i].id %>/delete">
+												<input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+												<a class="tournament-delete"><span class="glyphicon glyphicon-trash"></span></a>
+											</form>
+										</td>
 									</tr>
 								<% } %>
 							</tbody>

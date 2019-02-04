@@ -112,6 +112,11 @@ $(document).ready(function() {
     });
   });
 
+	// tournament delete click form submit
+	$('.tournament-delete').click(function(el) {
+		$(el.currentTarget).parent().submit();
+	});
+
   // add community member ajax call
   $('#add-member-send').click(function() {
   	var user = $('#add-member-user').val(),
@@ -145,5 +150,5 @@ $(document).ready(function() {
   			dismissAlerts();
   		}
   	});
-  })
+  });
 });
