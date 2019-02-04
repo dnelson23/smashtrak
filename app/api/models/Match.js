@@ -7,7 +7,7 @@
  */
 
  module.exports = {
- 	tableName: 'Matches',
+ 	tableName: 'Match',
 
  	attributes: {
  		winner: {

@@ -7,7 +7,7 @@
  */
 
 module.exports = {
- 	tableName: 'Smashers',
+ 	tableName: 'Smasher',
 
  	attributes: {
  		tag: {

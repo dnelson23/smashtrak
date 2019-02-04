@@ -7,7 +7,7 @@
  */
 
  module.exports = {
- 	tableName: 'Communities',
+ 	tableName: 'Community',
 
  	attributes: {
  		name: {

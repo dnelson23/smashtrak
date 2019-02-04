@@ -7,7 +7,7 @@
  */
 
  module.exports = {
- 	tableName: 'Tournaments',
+ 	tableName: 'Tournament',
 
  	attributes: {
  		name: {

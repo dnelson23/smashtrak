@@ -8,7 +8,7 @@
  */
 
 module.exports = {
- 	tableName: 'Community_Members',
+ 	tableName: 'CommunityMember',
 
  	attributes: {
  		community: {
