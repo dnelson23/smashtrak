@@ -27,6 +27,10 @@
  			collection: 'match',
  			via: 'tournament'
  		},
+		placings: {
+			collection: 'placing',
+			via: 'tournament'
+		},
  		type: {
  			type: 'string',
  			enum: ['challonge', 'smash.gg'],

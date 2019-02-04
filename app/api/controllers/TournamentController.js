@@ -8,8 +8,33 @@
 
  module.exports = {
 
-  find: function(req, res) {
-    Tournament
+  find: async function(req, res) {
+    try {
+        var tournament = await Tournament.findOne(req.params.tID).populate('community').populate('matches').populate('placings');
+        if(tournament) {
+            var smashers = [];
+            tournament.matches.forEach(function(m) {
+	        if(smashers.indexOf(m.winner) == -1) smashers.push(m.winner);
+	        if(smashers.indexOf(m.loser) == -1) smashers.push(m.loser);
+            });
+
+            tournament.placings.sort(function(a, b) { return a.place - b.place });
+            for(var i = 0; i < tournament.placings.length; i++) {
+                tournament.placings[i].smasher = await Smasher.findOne({ id: tournament.placings[i].smasher });
+            };
+
+            var s = await Smasher.find(smashers);
+
+            return res.view('tournament/index', { tournament: tournament, smashers: s });
+        } else {
+            FlashService.error(req, "Could not find tournament");
+	    return res.redirect('back');
+        }
+    } catch(err) {
+        console.log(err);
+        return res.negotiate(err);
+    }
+    /*Tournament
     .findOne(req.params.tID)
     .populate('community')
     .populate('matches')
@@ -32,7 +57,7 @@
     })
     .catch(function(err) {
       if(err) res.negotiate(err);
-    });
+    });*/
   },
 
  	new: function(req, res) {
