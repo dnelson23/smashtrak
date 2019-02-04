@@ -1,10 +1,12 @@
 CREATE TABLE Smasher (
 	id INT NOT NULL AUTO_INCREMENT,
 	tag VARCHAR(255) NOT NULL,
-	createdAt DATETIME NOT NULL DEFAULT,
+	community INT NOT NULL,
 	createdBy INT,
+	createdAt DATETIME NOT NULL DEFAULT NOW(),
+	updatedBy INT,
 	updatedAt DATETIME,
-	createdBy INT,
+	deletedBy INT,
 	deletedAt DATETIME,
-	PRIMARY KEY (id)
+	CONSTRAINT PK_SMASHER PRIMARY KEY (id)
 )
