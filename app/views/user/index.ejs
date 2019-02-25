@@ -1,0 +1,54 @@
+<div class="well smasher-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="underline-green" style="margin-bottom:20px">Edit User: <%= req.user.username %></h1>
+        </div>
+        <div class="col-xs-12">
+            <form method="post" action="/user/<%= req.user.id %>/edit" class="form-horizontal">
+                <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="username" class="control-label col-xs-12 col-sm-2">Username</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="text" class="form-control" name="username" value="<%= req.user.username %>" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="email" class="control-label col-xs-12 col-sm-2">Email</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="text" class="form-control" name="email" value="<%= req.user.email %>" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="password" class="control-label col-xs-12 col-sm-2">Password</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="password" class="form-control" name="password" placeholder="New Password" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="confirm_password" class="control-label col-xs-12 col-sm-2">Confirm Password</label>
+                            <div class="col-xs-12 col-sm-5">
+                                <input type="password" class="form-control" name="confirm-pass" placeholder="Confirm Password" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-2 col-sm-4">
+                        <button type="submit" class="btn btn-primary full outline">Save</button>
+                    </div>
+                    <div class="col-xs-12 col-lg-2 col-sm-4">
+                        <button id="delete-account" type="button" class="btn btn-danger full outline">Delete Account</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

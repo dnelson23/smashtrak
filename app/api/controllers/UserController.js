@@ -41,7 +41,7 @@ module.exports = {
 
 	// GET '/u/:username'
 	edit: function(req, res) {
-		return res.view('user/edit');
+		return res.view('user/index');
 	},
 
 	/* POST '/u/:username'
