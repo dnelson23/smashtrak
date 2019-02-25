@@ -37,9 +37,37 @@
 		}
  	},
 
- 	edit: function(req, res) {
- 		return res.underConstruction(['Testing Data pass']);
+    edit: async function(req, res) {
+        var smasher = await Smasher.findOne({ community: req.params.commID, tag: req.params.sTag })
+            .populate("community");
+
+        return res.view('smasher/edit', { smasher: smasher, community: smasher.community });
  	},
+
+    update: async function(req, res) {
+
+        var smasher = await Smasher.findOne({ community: req.params.commID, id: req.params.sId })
+            .populate("community"),
+            newTag = req.param("tag");
+
+        if(smasher) {
+            try {
+                var updated = await Smasher.update(smasher.id, { tag: newTag });
+                console.log(updated);
+                if(updated) {
+                    FlashService.success(req, "Smasher Updated");
+                    return res.redirect(`/c/${ smasher.community.id }/smasher/${ newTag }a/`);
+                } else {
+                    FlashService.error(req, "Oops! There was an error updating that smasher");
+                }
+            } catch(err) {
+                console.log(err);
+                FlashService.error(req, "Unknown Error");
+            }
+        }
+
+        return res.view("smasher/index", { smasher: smasher, community: smasher.community });
+    },
 
  	doesExist: function(req, res) {
  		Smasher

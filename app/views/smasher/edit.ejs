@@ -1,0 +1,29 @@
+<div class="well smasher-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="/u/<%= req.user.id %>/dashboard">Dashboard</a></li>
+                <li><a href="/c/<%= community.id %>"><%= community.name %></a></li>
+                <li><a href="/c/<%= community.id %>/smasher/<%= smasher.tag %>"><%= smasher.tag %></a></li>
+                <li class="active">Edit</li>
+            </ol>
+        </div>
+        <div class="col-xs-12">
+            <h1 class="underline-green">Edit Smasher</h1>
+            <form method="post" action="/c/<%= community.id %>/smasher/<%= smasher.id %>" class="form-horizontal">
+			    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="name" class="control-label col-xs-2">Tag</label>
+                            <div class="col-sm-5 col-xs-10">
+                                <input type="text" class="form-control" name="tag" value="<%= smasher.tag %>" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
