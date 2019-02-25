@@ -48,12 +48,12 @@ $(document).ready(function() {
   // home page login and register button click events
 	$('#login-button').click(function() {
 		$('#login-link').tab('show');
-		$('#login-modal').modal('show');
+		$('#login-modal').modal({ show: true, keyboard: true });
 	});
 
 	$('#register-button').click(function() {
 		$('#register-link').tab('show');
-		$('#login-modal').modal('show');
+		$('#login-modal').modal({ show: true, keyboard: true });
 	});
 
 	// close dismissible alerts after 5 seconds
