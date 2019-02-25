@@ -43,13 +43,15 @@ module.exports.routes = {
   'post /c/:commID/addMember' : 'CommunityController.requestMember',
 
   // Tournament Routes
-  'get /c/:commID/tournament/new'		: 'TournamentController.new',
-  'post /c/:commID/tournament/new'		: 'TournamentController.pullTournament',
-  'post /c/:commID/tournament/create'		: 'TournamentController.create',
-  'get /c/:commID/tournament/:tID'		: 'TournamentController.find',
-  'post /c/:commID/tournament/:tID/delete'	: 'TournamentController.delete',
+  'get /c/:commID/tournament/new'           : 'TournamentController.new',
+  'post /c/:commID/tournament/new'          : 'TournamentController.pullTournament',
+  'post /c/:commID/tournament/create'       : 'TournamentController.create',
+  'get /c/:commID/tournament/:tID'          : 'TournamentController.find',
+  'post /c/:commID/tournament/:tID/delete'  : 'TournamentController.delete',
 
   // Smashers Routes
-  'get /c/:commID/smasher/:sTag'      : 'SmasherController.find',
-  'get /smashers/doesExist'           : 'SmasherController.doesExist',
+  'get /c/:commID/smasher/:sTag'        : 'SmasherController.find',
+  'get /c/:commID/smasher/:sTag/edit'   : 'SmasherController.edit',
+  'post /c/:commID/smasher/:sId'        : 'SmasherController.update',
+  'get /smashers/doesExist'             : 'SmasherController.doesExist',
 };
