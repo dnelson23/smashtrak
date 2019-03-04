@@ -21,6 +21,9 @@ module.exports = {
  		},
  		description: {
  			type: 'string'
- 		}
+ 		},
+        isAdmin: function() {
+            return type == 'Admin' || type == 'SuperUser';
+        }
  	}
 }
