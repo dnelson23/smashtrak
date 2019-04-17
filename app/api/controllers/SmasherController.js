@@ -50,8 +50,7 @@
         var smasher;
         for(var i = 0; i < smashers.length; i++) {
             var smasher = smashers[i];
-            if(smasher == req.params.sTag) {
-            } else {
+            if(smasher.tag.toLowerCase() == req.params.sTag.toLowerCase()) {
                 smashers.splice(1, i);
                 break;
             }
