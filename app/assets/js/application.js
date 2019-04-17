@@ -56,6 +56,10 @@ $(document).ready(function() {
 		$('#login-modal').modal({ show: true, keyboard: true });
 	});
 
+    $('#delete-account').click(function() {
+        $('#delete-account-modal').modal({ show: true, keyboard: true });
+    });
+
 	// close dismissible alerts after 5 seconds
 	dismissAlerts();
 
