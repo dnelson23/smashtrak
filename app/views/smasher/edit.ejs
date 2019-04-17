@@ -14,16 +14,42 @@
 			    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="form-group">
+                        <div id="nameForm" class="form-group">
                             <label for="name" class="control-label col-xs-2">Tag</label>
                             <div class="col-sm-5 col-xs-10">
-                                <input type="text" class="form-control" name="tag" value="<%= smasher.tag %>" />
+                                <input type="text" id="newName" class="form-control" name="tag" value="<%= smasher.tag %>" />
+                            </div>
+                            <div class="col-lg-offset-2 col-lg-10 col-xs-12">
+                                <label id="warningLabel" for="newName" class="control-label" style="display:none;">Another smasher already exists with this tag, saving will merge the two smashers</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-offset-2 col-lg-2 col-xs-12">
+                        <button type="submit" class="btn btn-primary outline full">Save</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script type="application/javascript">
+    // create array of existing smashers in lowerscase
+    var existingSmashers = '<%- existingSmashers %>'.split(',');
+    for(var i = 0; i < existingSmashers.length; i++) {
+        var tag = existingSmashers[i];
+        existingSmashers[i] = tag.toLowerCase();
+    }
+
+    $('#newName').keyup(function(data) {
+        var newTag = data.currentTarget.value.toLowerCase();
+        console.log(newTag);
+        if(existingSmashers.indexOf(newTag) >= 0) {
+            $('#nameForm').addClass('has-warning');
+            $('#warningLabel').show();
+        } else {
+            $('#nameForm').removeClass('has-warning');
+            $('#warningLabel').hide();
+        }
+    });
+</script>
 
