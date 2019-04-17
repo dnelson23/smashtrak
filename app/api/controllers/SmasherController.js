@@ -7,6 +7,9 @@
 
  module.exports = {
 
+    /* GET: /c/{commID}/{sTag}
+     * Displays a single smasher in given community
+     */
  	find: async function(req, res) {
 		try {
 			var smasher = await Smasher.findOne({ community: req.params.commID, tag: req.params.sTag })
@@ -37,13 +40,33 @@
 		}
  	},
 
+    /* GET: /c/{commID}/{sTag}/edit
+     * Displays smasher edit page
+     */
     edit: async function(req, res) {
-        var smasher = await Smasher.findOne({ community: req.params.commID, tag: req.params.sTag })
+        var smashers = await Smasher.find({ community: req.params.commID })
             .populate("community");
 
-        return res.view('smasher/edit', { smasher: smasher, community: smasher.community });
+        var smasher;
+        for(var i = 0; i < smashers.length; i++) {
+            var smasher = smashers[i];
+            if(smasher == req.params.sTag) {
+            } else {
+                smashers.splice(1, i);
+                break;
+            }
+        }
+
+        if(smasher) {
+            return res.view('smasher/edit', { smasher: smasher, existingSmashers: smashers.map(s => s.tag ), community: smasher.community });
+        } else {
+            return res.notFound();
+        }
  	},
 
+    /* POST: /c/{commID}/{sTag}
+     * Updates a single smasher in given community
+     */
     update: async function(req, res) {
 
         var smasher = await Smasher.findOne({ community: req.params.commID, id: req.params.sId })
@@ -52,14 +75,24 @@
 
         if(smasher) {
             try {
-                var updated = await Smasher.update(smasher.id, { tag: newTag });
-                console.log(updated);
-                if(updated) {
-                    FlashService.success(req, "Smasher Updated");
-                    return res.redirect(`/c/${ smasher.community.id }/smasher/${ newTag }a/`);
-                } else {
-                    FlashService.error(req, "Oops! There was an error updating that smasher");
+                var existingSmasher = await Smasher.findOne({ community: req.params.commID, tag: newTag });
+                if(existingSmasher && existingSmasher.id != smasher.id) { // merge smashers
+                    await Placing.update({ id: smasher.id }, { id: existingSmasher.id });
+                    await Match.update({ winner: smasher.id }, { winner: smasher.id });
+                    await Match.update({ loser: smasher.id }, { loser: smasher.id });
+                    await Smasher.destroy({ id: smasher.id });
+                    FlashService.success(req, "Smashers Merged");
+                } else { // update tag
+                    var updated = await Smasher.update(smasher.id, { tag: newTag });
+                    console.log(updated);
+                    if(updated) {
+                        FlashService.success(req, "Smasher Updated");
+                    } else {
+                        FlashService.error(req, "Oops! There was an error updating that smasher");
+                    }
                 }
+                
+                return res.redirect(`/c/${ smasher.community.id }/smasher/${ newTag }/`);
             } catch(err) {
                 console.log(err);
                 FlashService.error(req, "Unknown Error");
@@ -69,6 +102,9 @@
         return res.view("smasher/index", { smasher: smasher, community: smasher.community });
     },
 
+    /* GET: /smasher/doesExist
+     * Returns true/false if smasher exists
+     */
  	doesExist: function(req, res) {
  		Smasher
  		.findOne({community: req.param('community'), tag: req.param('tag') })
