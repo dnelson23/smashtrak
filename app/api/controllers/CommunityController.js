@@ -9,51 +9,23 @@
  module.exports = {
 
  	// GET '/c/:commID'
- 	find: function(req, res) {
- 		Community
- 		.findOne(req.params.commID)
- 		.populate('tournaments')
- 		.populate('smashers')
- 		.then(function(community) {
- 			if(community) {
- 				community = community.toObject(); // this lets us replace associations once we manually find and populate them
- 				// we only need the number of entrants for each tournaments but we have to retrieve them manually
- 				async.map(community.tournaments, function(tournament, mapCb) {
- 					Tournament
- 					.findOne(tournament.id)
- 					.populate('entrants')
- 					.exec(function(err, t) {
- 						if(err) return mapCb(err);
- 						return mapCb(null, t);
- 					});
- 				}, function(err, tournaments) {
- 					if(err) return res.negotiate(err);
+ 	find: async function(req, res) {
+ 		var community = await Community.findOne(req.params.commID)
 
- 					community.tournaments = tournaments ? tournaments : [];
- 					// now find our smashers
-	 				async.map(community.smashers, function(smasher, mapCb) {
-		 				Smasher
-		 				.findOne(smasher.id)
-		 				.populate('wins')
-		 				.populate('losses')
-		 				.exec(function(err, s) {
-		 					if(err) return mapCb(err);
-		 					return mapCb(null, s);
-		 				});
-		 			}, function(err, smashers) {
-		 				if(err) return res.negotiate(err);
-		 				
-		 				community.smashers = smashers ? smashers : [];
-		 				return res.view('community/index', { community: community, role: res.locals.role });
-		 			});
- 				});
-	 		} else {
-	 			return res.notFound(undefined, { description: 'Could not find that community.' });
-	 		}
- 		})
-		.catch(function(err) {
-			res.negotiate(err);
-		});
+        if(community) {
+            // get tournaments manually to populate entrants
+            community.tournaments = await Tournament.find({ community: community.id })
+                .populate('entrants');
+
+            // get smashers to populate wins and losses
+            community.smashers = await Smasher.find({ community: community.id })
+                .populate('wins')
+                .populate('losses');
+
+            return res.view('community/index', { community: community, role: res.locals.role });
+        } else {
+            return res.notFound(undefined, { description: 'Could not find that community.' });
+        }
  	},
 
  	// GET '/c/new'
@@ -101,22 +73,24 @@
  	},
 
  	// GET '/c/:commID/edit'
- 	edit: function(req, res) {
- 		Community
- 		.findOne(req.params.commID)
- 		.exec(function(err, c) {
- 			if(err) return res.negotiate(err);
+ 	edit: async function(req, res) {
+ 		var community = await Community.findOne(req.params.commID);
 
- 			if(c) {
-	 			MemberRole
-	 			.find()
-	 			.exec(function(err, roles) {
-	 				if(err) return res.negotiate(err);
+        if(community) {
+            // if user is an admin or superuser fill also add community members
+            var members = await CommunityMember.find({ community: community.id })
+                .populate('user')
+                .populate('role');
 
-	 				return res.view('community/edit', { community: c, roles: roles.splice(1) });
-	 			});
-	 		} else return res.notFound(undefined, 'Could not find that community');
- 		});
+            if(res.locals.role.type != 'SuperUser') {
+                members = members.filter(x => x.role != 1);
+            }
+
+            var roles = await MemberRole.find();
+
+	        return res.view('community/edit', { community: community, members: members, roles: roles.splice(1) });
+
+        } else return res.notFound(undefined, 'Could not find that community');
  	},
 
  	/* POST '/c/:commID/edit'
@@ -124,7 +98,7 @@
  	 * @param {String} name
  	 * @param {String} description
  	 */
- 	update: function(req, res) {
+    update: function(req, res) {
  		Community
  		.findOne(req.params.commID)
  		.exec(function(err, c) {
@@ -156,6 +130,38 @@
  			return res.redirect('/u/' + req.user.username + '/dashboard');
  		});
  	},
+
+    // GET '/c/:commID/member/:memberID'
+    findMember: async function(req, res) {
+        var community = await Community.findOne({ id: req.params.commID });
+        var member = await CommunityMember.findOne({ id: req.params.memberID })
+            .populate('user');
+        var roles = await MemberRole.find();
+
+        return res.view('community/member', { community: community, member: member, roles: roles });
+    },
+
+    // POST '/c/:commID/member/:memberID'
+    updateMember: async function(req, res) {
+        var member = await CommunityMember.findOne({ id: req.params.memberID });
+
+        if(member) {
+            member.role = parseInt(req.param('role'));
+
+            var saveCb = function(err) {
+                if(err) {
+                    console.log(err);
+                    FlashService.error(req, 'There was a problem updating the member');
+                } else {
+                    FlashService.success(req, 'Member updated successfully!');
+                }
+                return res.redirect('/c/' + req.params.commID + '/member/' + member.id);
+            }
+
+            member.save(saveCb);
+
+        } else return res.notFound();
+    },
 
  	// Ajax call that attempts to send a member request to a user
  	requestMember: function(req, res) {
