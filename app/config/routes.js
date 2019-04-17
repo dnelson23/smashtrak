@@ -34,13 +34,16 @@ module.exports.routes = {
   'get /u/checkUser'              : 'UserController.checkUser',
 
   // Community Routes
-  'get /c/new'                : 'CommunityController.new',
-  'post /c/new'               : 'CommunityController.create',
-  'get /c/:commID'            : 'CommunityController.find',
-  'get /c/:commID/edit'       : 'CommunityController.edit',
-  'post /c/:commID/edit'      : 'CommunityController.update',
-  'post /c/:commID/delete'    : 'CommunityController.delete',
-  'post /c/:commID/addMember' : 'CommunityController.requestMember',
+  'get /c/new'                              : 'CommunityController.new',
+  'post /c/new'                             : 'CommunityController.create',
+  'get /c/:commID'                          : 'CommunityController.find',
+  'get /c/:commID/edit'                     : 'CommunityController.edit',
+  'post /c/:commID/edit'                    : 'CommunityController.update',
+  'post /c/:commID/delete'                  : 'CommunityController.delete',
+  'get /c/:commID/member/:memberID'         : 'CommunityController.findMember',
+  'post /c/:commID/member/:memberID'        : 'CommunityController.updateMember',
+  'get /c/:commID/member/:memberID/delete'  : 'CommunityController.deleteMember',
+  'post /c/:commID/addMember'               : 'CommunityController.requestMember',
 
   // Tournament Routes
   'get /c/:commID/tournament/new'           : 'TournamentController.new',

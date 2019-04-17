@@ -1,0 +1,42 @@
+<div class="well">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Edit Community Member: <%= member.user.username %></h1>
+            <form method="post" action="/c/<%= community.id %>/member/<%= member.id %>">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select class="form-control" name="role">
+                                <% for(var i = 0; i < roles.length; i++) { %>
+                                    <option <% if(roles[i].id == member.role) { %> selecte <% } %> value="<%= roles[i].id %>"><%= roles[i].type %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12 col-sm-2">
+                        <button type="submit" class="btn btn-primary outline full">Save</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <button type="button" class="btn btn-danger outline full" data-toggle="modal" data-target="#delete-member-modal">Remove</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="delete-member-modal" tabindex="-1" role="dialog" aria-labelledby="delete-member-header">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="delete-member-header">Remove User <%= member.user.username %>?</h3>
+                <a href="/c/<%= community.id %>/member/<%= member.id %>/delete" class="btn btn-danger">Remove</a>
+            </div>
+        </div>
+    </div>
+</div>
