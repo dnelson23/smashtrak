@@ -51,7 +51,7 @@
         for(var i = 0; i < smashers.length; i++) {
             var smasher = smashers[i];
             if(smasher.tag.toLowerCase() == req.params.sTag.toLowerCase()) {
-                smashers.splice(1, i);
+                smashers.splice(i, 1);
                 break;
             }
         }
@@ -76,9 +76,9 @@
             try {
                 var existingSmasher = await Smasher.findOne({ community: req.params.commID, tag: newTag });
                 if(existingSmasher && existingSmasher.id != smasher.id) { // merge smashers
-                    await Placing.update({ id: smasher.id }, { id: existingSmasher.id });
-                    await Match.update({ winner: smasher.id }, { winner: smasher.id });
-                    await Match.update({ loser: smasher.id }, { loser: smasher.id });
+                    await Placing.update({ smasher: smasher.id }, { smasher: existingSmasher.id });
+                    await Match.update({ winner: smasher.id }, { winner: existingSmasher.id });
+                    await Match.update({ loser: smasher.id }, { loser: existingSmasher.id });
                     await Smasher.destroy({ id: smasher.id });
                     FlashService.success(req, "Smashers Merged");
                 } else { // update tag
