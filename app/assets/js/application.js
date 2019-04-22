@@ -75,47 +75,6 @@ $(document).ready(function() {
   	}
 	});
 
-	// tournament upload smasher quicksearch
-	$('#search-smashers').change(function() {
-    var tag = $(this).val().toLowerCase();
-    if(tag == "") {
-      $('.smasher').each(function() {
-        if(!$(this).is(":visible"))
-          $(this).slideToggle();
-      })
-    } else {
-      $('.smasher').each(function() {
-      	if($(this).text().toLowerCase().indexOf(tag) != -1 && !$(this).is(":visible")) $(this).slideToggle();
-      	else if($(this).text().toLowerCase().indexOf(tag) == -1 && $(this).is(":visible")) $(this).slideToggle();
-      });
-    }
-	});
-
-	// ajax call to check if a smasher exists in a community
-	$('input.tag-upload').change(function() {
-    var tag = $(this).val(),
-    		community = $('#community_id').val(),
-      	dom = $(this),
-      	status = false;
-
-    $.ajax ({
-      type: 'GET',
-      url: "/smashers/doesExist",
-      dataType: "json",
-      data: { tag: tag, community: community },
-      success: function(data) {
-        var status = dom.parent().parent().find(".tag-status");
-        if(data.exists == true) {
-        	status.removeClass('glyphicon-warning-sign alert-warning');
-        	status.addClass('glyphicon-ok alert-success');
-        } else {
-          status.removeClass('glyphicon-ok alert-success');
-          status.addClass('glyphicon-warning-sign alert-warning');
-        }
-      }
-    });
-  });
-
 	// tournament delete click form submit
 	$('.tournament-delete').click(function(el) {
 		$(el.currentTarget).parent().submit();
