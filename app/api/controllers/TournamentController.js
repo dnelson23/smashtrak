@@ -178,12 +178,11 @@
   delete: async function(req, res) {
     var tournamentId = req.param("tID");
     var tDeleted = await Tournament.destroy({ id: tournamentId });
-    console.log(tDeleted);
     var communityId = req.param("commID");
 
     if(tDeleted) {
-      var pDeleted = Placing.destroy({ tournament: tournamentId });
-      var mDeleted = Match.destroy({ tournament: tournamentId });
+      var pDeleted = await Placing.destroy({ tournament: tournamentId });
+      var mDeleted = await Match.destroy({ tournament: tournamentId });
       FlashService.success(req, "Tournament deleted");
     } else {
       FlashService.success(req, "Could not find tournament to delete");
