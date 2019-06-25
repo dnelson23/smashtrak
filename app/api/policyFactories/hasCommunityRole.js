@@ -12,11 +12,9 @@ module.exports = function(role) {
  	return function(req, res, next) {
  		var roles = {SuperUser: 1, Admin: 2, Member: 3};
  		// set the search params to search for desired role or admin for community, or superuser access
- 		var criteria = [{community: req.params.commID, user: req.user.id, role: roles[role]},
- 										{community: req.params.commID, user: req.user.id, role: 2},
- 										{user: req.user.id, role: 1}];
+ 		var criteria = { community: req.params.CommID, user: req.user.id, role: { in: [ roles[role], 1 ]} };
  		CommunityMember
-		.find({or: criteria, sort: 'role'})
+		.find(criteria)
 		.populate('role')
 		.then(function(member) {
 			if(member.length > 0) {

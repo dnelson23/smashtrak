@@ -17,7 +17,7 @@ module.exports.models = {
   * connections (see `config/connections.js`)                                *
   *                                                                          *
   ***************************************************************************/
-  connection: 'mysql',
+  datastore: 'default',
 
   /***************************************************************************
   *                                                                          *
@@ -28,6 +28,17 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
   migrate: 'safe',
+
+  fetchRecordsOnUpdate: true,
+  fetchRecordsOnCreate: true,
+  fetchRecordsonCreateEach: true,
+
+  attributes: {
+      createdAt: { type: 'number', autoCreatedAt: true },
+      updatedAt: { type: 'number', autoUpdatedAt: true },
+
+      id: { type: 'number', autoIncrement: true },
+  },
 
   beforeUpdate: function(model, cb) {
     if(model.autoUpdatedAt) {

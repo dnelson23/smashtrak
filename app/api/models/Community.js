@@ -6,26 +6,26 @@
  * @description: Community model to house basic community information
  */
 
- module.exports = {
+module.exports = {
  	tableName: 'Community',
 
  	attributes: {
  		name: {
  			type: 'string',
- 			required: 'true',
+ 			required: true,
  			unique: false
  		},
  		// isPrivate is stored in the DB as 1 for private and 0 for public
  		isPrivate: {
- 			type: 'int'
+ 			type: 'number'
  		},
  		description: {
  			type: 'string',
  		},
  		members: {
  			collection: 'user',
- 			via: 'user',
- 			through: 'communitymember'
+ 			via: 'community',
+ 			through: 'CommunityMember'
  		},
  		tournaments: {
  			collection: 'tournament',
@@ -35,10 +35,18 @@
  			collection: 'smasher',
  			via: 'community'
  		},
- 		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' },
- 		shortDescription: function() {
- 			return this.description.substring(0, 30);
- 		}
- 	}
- }
+ 		createdBy: { type: 'number' },
+ 		updatedBy: { type: 'number' },
+ 	},
+
+    // Model method that returns just the first 30chars of description
+    shortDescription: function(c) {
+        if(typeof(c) === 'object' && c.description) {
+            return c.description.substring(0, 30);
+        } else {
+            return '';
+        }
+    }
+
+}
+

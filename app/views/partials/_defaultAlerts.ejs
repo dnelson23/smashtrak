@@ -1,4 +1,4 @@
-<% if (messages && messages['error'].length > 0) { %>
+<% if (messages != null && messages != undefined && messages['error'].length > 0) { %>
   <div class="alert alert-dismissible alert-danger fade in" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  <% messages['error'].forEach(function(message) { %>
@@ -8,7 +8,7 @@
   </div>
   <br>
 <% } %>
-<% if (messages && messages['warning'].length > 0) { %>
+<% if (messages != null && messages != undefined && messages['warning'].length > 0) { %>
   <div class="alert alert-dismissible alert-warning fade in" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  <% messages['warning'].forEach(function(message) { %>
@@ -18,7 +18,7 @@
   </div>
   <br>
 <% } %>
-<% if (messages && messages['success'].length > 0) { %>
+<% if (messages != null && messages != undefined && messages['success'].length > 0) { %>
   <div class="alert alert-dismissible alert-success fade in" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  <% messages['success'].forEach(function(message) { %>

@@ -19,8 +19,8 @@
  		tournament: {
  			model: 'tournament'
  		},
- 		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' }
+ 		createdBy: { type: 'number' },
+ 		updatedBy: { type: 'number' }
  	}
  }
  

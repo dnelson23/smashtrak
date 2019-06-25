@@ -11,7 +11,7 @@ module.exports = {
 
  	attributes: {
  		place: {
- 			type: 'integer',
+ 			type: 'number',
  			required: true
  		},
  		tournament: {
@@ -20,8 +20,8 @@ module.exports = {
  		smasher: {
  			model: 'smasher'
  		},
- 		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' }
+ 		createdBy: { type: 'number' },
+ 		updatedBy: { type: 'number' }
  	}
 }
  

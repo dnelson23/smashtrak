@@ -22,9 +22,9 @@ module.exports = {
  		},
  		status: {
  			type: 'string',
- 			enum: ['pending', 'accepted']
+ 			isIn: ['pending', 'accepted']
  		},
- 		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' }
+ 		createdBy: { type: 'number' },
+ 		updatedBy: { type: 'number' }
  	}
 }

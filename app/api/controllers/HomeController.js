@@ -7,6 +7,7 @@
 module.exports = {
 
 	index: function(req, res) {
+        console.log(res.locals.messages);
 		return res.view('home/index');
 	},
 

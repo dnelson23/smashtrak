@@ -13,7 +13,7 @@ module.exports = {
 
     attributes: {
         email: {
-            type: 'email',
+            type: 'string',
             required: true,
             unique: true
         },
@@ -36,12 +36,13 @@ module.exports = {
         roles: {
             collection: 'communitymember',
             via: 'user'
-        },
-        toJSON: function() {
-            var obj = this.toObject();
-            delete obj.password;
-            return obj;
         }
+    },
+
+    toJSON: function(u) {
+        var obj = u.toObject();
+        delete obj.password;
+        return obj;
     },
 
     beforeCreate: function(user, cb) {

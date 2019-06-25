@@ -29,7 +29,12 @@ module.exports = {
  			collection: 'placing',
  			via: 'smasher'
  		},
- 		createdBy: { type: 'integer' },
- 		updatedBy: { type: 'integer' },
+        tournaments: {
+            collection: 'tournament',
+            via: 'smasher',
+            through: 'placing'
+        },
+ 		createdBy: { type: 'number' },
+ 		updatedBy: { type: 'number' },
  	},
 }

@@ -34,23 +34,17 @@ module.exports.http = {
     passportSession : require('passport').session(),
 
     order: [
-      'startRequestTimer',
       'cookieParser',
       'session',
       'passportInit',
       'passportSession',
-      'myRequestLogger',
       'bodyParser',
-      'handleBodyParserError',
       'compress',
-      'methodOverride',
       'poweredBy',
       '$custom',
       'router',
       'www',
       'favicon',
-      '404',
-      '500'
     ],
 
   /****************************************************************************

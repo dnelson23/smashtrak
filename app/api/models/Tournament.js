@@ -12,7 +12,7 @@
  	attributes: {
  		name: {
  			type: 'string',
- 			required: 'true',
+ 			required: true,
  			unique: false
  		},
  		community: {
@@ -20,8 +20,8 @@
  		},
  		entrants: {
  			collection: 'smasher',
- 			via: 'smasher',
- 			through: 'placing'
+ 			via: 'tournament',
+            through: 'placing'
  		},
  		matches: {
  			collection: 'match',
@@ -33,17 +33,18 @@
 		},
  		type: {
  			type: 'string',
- 			enum: ['challonge', 'smash.gg'],
- 			required: 'true',
+ 			isIn: ['challonge', 'smash.gg'],
+ 			required: true,
  		},
  		url: {
  			type: 'string',
- 			required: 'true',
+ 			required: true,
  		},
  		date: {
- 			type: 'date'
+            type: 'string',
+ 			columnType: 'date'
  		},
- 		createdBy: { type: 'integer', required: true },
- 		updatedBy: { type: 'integer', required: true }
+ 		createdBy: { type: 'number', required: true },
+ 		updatedBy: { type: 'number', required: true }
  	}
 }

@@ -98,26 +98,22 @@
  	 * @param {String} name
  	 * @param {String} description
  	 */
-    update: function(req, res) {
- 		Community
- 		.findOne(req.params.commID)
- 		.exec(function(err, c) {
- 			if(err) return res.negotiate(err);
+    update: async function(req, res) {
+ 		var c = Community.findOne(req.params.commID)
+        if(!c) {
+            return res.notFound();
+        }
 
- 			if(c) {
- 				c.name = req.param('name');
- 				c.description = req.param('description');
- 				c.updatedBy = req.user.id;
- 				c.save(function(err) {
- 					if(err) return res.negotiate(err);
+        c.name = req.param('name');
+        c.description = req.param('description');
+        c.updatedBy = req.user.id;
+        var cAfterUpdate = await Community.update(c);
+        c.save(function(err) {
+            if(err) return res.negotiate(err);
 
- 					FlashService.success(req, 'Community updated successfully.');
- 					return res.redirect('/c/' + c.id + '/edit');
- 				});
- 			} else {
- 				return res.notFound();
- 			}
- 		})
+            FlashService.success(req, 'Community updated successfully.');
+            return res.redirect('/c/' + c.id + '/edit');
+        });
  	},
 
  	// DELETE '/c/:commID/edit'
@@ -148,18 +144,14 @@
         if(member) {
             member.role = parseInt(req.param('role'));
 
-            var saveCb = function(err) {
-                if(err) {
-                    console.log(err);
-                    FlashService.error(req, 'There was a problem updating the member');
-                } else {
-                    FlashService.success(req, 'Member updated successfully!');
-                }
-                return res.redirect('/c/' + req.params.commID + '/member/' + member.id);
+            var memberAfterUpdate = await CommunityMember.updateOne(member.id, { role: member.role });
+
+            if(memberAfterUpdate.role == member.role) {
+                FlashService.success(req, 'Member updated successfully!');
+            } else {
+                FlashService.error(req, 'There was a problem updating the member');
             }
-
-            member.save(saveCb);
-
+            return res.redirect('/c/' + req.params.commID + '/member/' + member.id);
         } else return res.notFound();
     },
 

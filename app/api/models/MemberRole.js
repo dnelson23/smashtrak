@@ -9,21 +9,23 @@
 
 module.exports = {
  	tableName: 'MemberRole',
- 	autoCreatedAt: false,
- 	autoUpdatedAt: false,
 
  	attributes: {
  		type: {
  			type: 'string',
  			columnName: 'role',
- 			required: 'true',
+ 			required: true,
  			unique: true
  		},
  		description: {
  			type: 'string'
- 		},
-        isAdmin: function() {
-            return type == 'Admin' || type == 'SuperUser';
-        }
- 	}
+		},
+        createdAt: false,
+        updatedAt: false,
+ 	},
+
+    // Model method to return if role type is an admin
+    isAdmin: function(mr) {
+        return mr.type == 'Admin' || mr.type == 'SuperUser';
+    }
 }
