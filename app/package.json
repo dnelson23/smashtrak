@@ -6,7 +6,7 @@
   "keywords": [],
   "dependencies": {
     "@sailshq/upgrade": "^1.0.9",
-    "async": "2.1.4",
+    "async": "3.2.2",
     "bcrypt": "2.0.0",
     "dotenv": "^2.0.0",
     "ejs": "2.5.5",
